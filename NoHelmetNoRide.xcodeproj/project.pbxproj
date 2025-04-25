@@ -1,0 +1,603 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED8C401F2DBBA33F00502839 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED8C401E2DBBA33F00502839 /* SnapKit */; };
+		ED8C40212DBBA34200502839 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ED8C40202DBBA34200502839 /* Alamofire */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED8C3FEE2DBBA1E300502839 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED8C3FCF2DBBA1E100502839 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED8C3FD62DBBA1E100502839;
+			remoteInfo = NoHelmetNoRide;
+		};
+		ED8C3FF82DBBA1E300502839 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED8C3FCF2DBBA1E100502839 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED8C3FD62DBBA1E100502839;
+			remoteInfo = NoHelmetNoRide;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ED8C3FD72DBBA1E100502839 /* NoHelmetNoRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoHelmetNoRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED8C3FED2DBBA1E300502839 /* NoHelmetNoRideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoHelmetNoRideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED8C3FF72DBBA1E300502839 /* NoHelmetNoRideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoHelmetNoRideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ED8C3FFF2DBBA1E300502839 /* Exceptions for "NoHelmetNoRide" folder in "NoHelmetNoRide" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ED8C3FD62DBBA1E100502839 /* NoHelmetNoRide */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ED8C3FD92DBBA1E100502839 /* NoHelmetNoRide */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ED8C3FFF2DBBA1E300502839 /* Exceptions for "NoHelmetNoRide" folder in "NoHelmetNoRide" target */,
+			);
+			path = NoHelmetNoRide;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED8C3FD42DBBA1E100502839 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED8C401F2DBBA33F00502839 /* SnapKit in Frameworks */,
+				ED8C40212DBBA34200502839 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8C3FEA2DBBA1E300502839 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8C3FF42DBBA1E300502839 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED8C3FCE2DBBA1E100502839 = {
+			isa = PBXGroup;
+			children = (
+				ED8C3FD92DBBA1E100502839 /* NoHelmetNoRide */,
+				ED8C401D2DBBA33F00502839 /* Frameworks */,
+				ED8C3FD82DBBA1E100502839 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED8C3FD82DBBA1E100502839 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED8C3FD72DBBA1E100502839 /* NoHelmetNoRide.app */,
+				ED8C3FED2DBBA1E300502839 /* NoHelmetNoRideTests.xctest */,
+				ED8C3FF72DBBA1E300502839 /* NoHelmetNoRideUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED8C401D2DBBA33F00502839 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED8C3FD62DBBA1E100502839 /* NoHelmetNoRide */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8C40002DBBA1E300502839 /* Build configuration list for PBXNativeTarget "NoHelmetNoRide" */;
+			buildPhases = (
+				ED8C3FD32DBBA1E100502839 /* Sources */,
+				ED8C3FD42DBBA1E100502839 /* Frameworks */,
+				ED8C3FD52DBBA1E100502839 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ED8C3FD92DBBA1E100502839 /* NoHelmetNoRide */,
+			);
+			name = NoHelmetNoRide;
+			packageProductDependencies = (
+				ED8C401E2DBBA33F00502839 /* SnapKit */,
+				ED8C40202DBBA34200502839 /* Alamofire */,
+			);
+			productName = NoHelmetNoRide;
+			productReference = ED8C3FD72DBBA1E100502839 /* NoHelmetNoRide.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED8C3FEC2DBBA1E300502839 /* NoHelmetNoRideTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8C40052DBBA1E300502839 /* Build configuration list for PBXNativeTarget "NoHelmetNoRideTests" */;
+			buildPhases = (
+				ED8C3FE92DBBA1E300502839 /* Sources */,
+				ED8C3FEA2DBBA1E300502839 /* Frameworks */,
+				ED8C3FEB2DBBA1E300502839 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED8C3FEF2DBBA1E300502839 /* PBXTargetDependency */,
+			);
+			name = NoHelmetNoRideTests;
+			packageProductDependencies = (
+			);
+			productName = NoHelmetNoRideTests;
+			productReference = ED8C3FED2DBBA1E300502839 /* NoHelmetNoRideTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ED8C3FF62DBBA1E300502839 /* NoHelmetNoRideUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8C40082DBBA1E300502839 /* Build configuration list for PBXNativeTarget "NoHelmetNoRideUITests" */;
+			buildPhases = (
+				ED8C3FF32DBBA1E300502839 /* Sources */,
+				ED8C3FF42DBBA1E300502839 /* Frameworks */,
+				ED8C3FF52DBBA1E300502839 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED8C3FF92DBBA1E300502839 /* PBXTargetDependency */,
+			);
+			name = NoHelmetNoRideUITests;
+			packageProductDependencies = (
+			);
+			productName = NoHelmetNoRideUITests;
+			productReference = ED8C3FF72DBBA1E300502839 /* NoHelmetNoRideUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED8C3FCF2DBBA1E100502839 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					ED8C3FD62DBBA1E100502839 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					ED8C3FEC2DBBA1E300502839 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = ED8C3FD62DBBA1E100502839;
+					};
+					ED8C3FF62DBBA1E300502839 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = ED8C3FD62DBBA1E100502839;
+					};
+				};
+			};
+			buildConfigurationList = ED8C3FD22DBBA1E100502839 /* Build configuration list for PBXProject "NoHelmetNoRide" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED8C3FCE2DBBA1E100502839;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				ED8C401C2DBBA33800502839 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ED8C3FD82DBBA1E100502839 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED8C3FD62DBBA1E100502839 /* NoHelmetNoRide */,
+				ED8C3FEC2DBBA1E300502839 /* NoHelmetNoRideTests */,
+				ED8C3FF62DBBA1E300502839 /* NoHelmetNoRideUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED8C3FD52DBBA1E100502839 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8C3FEB2DBBA1E300502839 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8C3FF52DBBA1E300502839 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED8C3FD32DBBA1E100502839 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8C3FE92DBBA1E300502839 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8C3FF32DBBA1E300502839 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED8C3FEF2DBBA1E300502839 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED8C3FD62DBBA1E100502839 /* NoHelmetNoRide */;
+			targetProxy = ED8C3FEE2DBBA1E300502839 /* PBXContainerItemProxy */;
+		};
+		ED8C3FF92DBBA1E300502839 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED8C3FD62DBBA1E100502839 /* NoHelmetNoRide */;
+			targetProxy = ED8C3FF82DBBA1E300502839 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ED8C40012DBBA1E300502839 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NoHelmetNoRide/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NH.NoHelmetNoRide;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ED8C40022DBBA1E300502839 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NoHelmetNoRide/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NH.NoHelmetNoRide;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ED8C40032DBBA1E300502839 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ED8C40042DBBA1E300502839 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ED8C40062DBBA1E300502839 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NH.NoHelmetNoRideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoHelmetNoRide.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NoHelmetNoRide";
+			};
+			name = Debug;
+		};
+		ED8C40072DBBA1E300502839 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NH.NoHelmetNoRideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoHelmetNoRide.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NoHelmetNoRide";
+			};
+			name = Release;
+		};
+		ED8C40092DBBA1E300502839 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NH.NoHelmetNoRideUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NoHelmetNoRide;
+			};
+			name = Debug;
+		};
+		ED8C400A2DBBA1E300502839 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NH.NoHelmetNoRideUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NoHelmetNoRide;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED8C3FD22DBBA1E100502839 /* Build configuration list for PBXProject "NoHelmetNoRide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8C40032DBBA1E300502839 /* Debug */,
+				ED8C40042DBBA1E300502839 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8C40002DBBA1E300502839 /* Build configuration list for PBXNativeTarget "NoHelmetNoRide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8C40012DBBA1E300502839 /* Debug */,
+				ED8C40022DBBA1E300502839 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8C40052DBBA1E300502839 /* Build configuration list for PBXNativeTarget "NoHelmetNoRideTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8C40062DBBA1E300502839 /* Debug */,
+				ED8C40072DBBA1E300502839 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8C40082DBBA1E300502839 /* Build configuration list for PBXNativeTarget "NoHelmetNoRideUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8C40092DBBA1E300502839 /* Debug */,
+				ED8C400A2DBBA1E300502839 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		ED8C401C2DBBA33800502839 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED8C401E2DBBA33F00502839 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		ED8C40202DBBA34200502839 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED8C401C2DBBA33800502839 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = ED8C3FCF2DBBA1E100502839 /* Project object */;
+}
