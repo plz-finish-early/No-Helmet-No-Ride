@@ -92,8 +92,8 @@ class LoginView: UIView {
         // 제약 설정
         self.idTextField.snp.makeConstraints {
             $0.top.equalTo(subTitleLabel.snp.bottom).offset(32)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(34)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(13)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(32)
             $0.height.equalTo(44)
         }
         
@@ -105,8 +105,8 @@ class LoginView: UIView {
         // 제약 설정
         self.idUnderLineView.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(34)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(32)
             $0.height.equalTo(1)
         }
         
@@ -121,7 +121,7 @@ class LoginView: UIView {
         // 제약 설정
         self.passwordTextField.snp.makeConstraints {
             $0.top.equalTo(idUnderLineView.snp.bottom).offset(32)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(34)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
             $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
             $0.height.equalTo(44)
         }
@@ -134,8 +134,8 @@ class LoginView: UIView {
         // 제약 설정
         self.passwordUnderLineView.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(34)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(13)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
             $0.height.equalTo(1)
         }
         
@@ -151,8 +151,6 @@ class LoginView: UIView {
         self.signUpButton.snp.makeConstraints {
             $0.top.equalTo(passwordUnderLineView.snp.bottom).offset(42)
             $0.centerX.equalTo(self.safeAreaLayoutGuide)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(12)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
             $0.height.equalTo(22)
         }
         
@@ -161,9 +159,7 @@ class LoginView: UIView {
         
         // 제약 설정
         self.mainButton.snp.makeConstraints {
-            //$0.top.equalTo(signUpButton.snp.bottom).offset(168)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(10)
-            $0.centerX.equalTo(self.safeAreaLayoutGuide)
             $0.leading.equalTo(self.safeAreaLayoutGuide).offset(12)
             $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
         }
