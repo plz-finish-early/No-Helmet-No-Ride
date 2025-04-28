@@ -25,38 +25,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTextView()
-    }
-    
-    func setupTextView() {
-        loginView.idTextView.delegate = self
-        loginView.passwordTextView.delegate = self
-    }
-}
-
-extension LoginViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if loginView.idTextView.textColor == UIColor.lightGray {
-            loginView.idTextView.text = nil
-            loginView.idTextView.textColor = .black
-        }
-        
-        if loginView.passwordTextView.textColor == UIColor.lightGray {
-            loginView.passwordTextView.text = nil
-            loginView.passwordTextView.textColor = .black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if loginView.idTextView.text.isEmpty {
-            loginView.idTextView.text = "아이디"
-            loginView.idTextView.textColor = .lightGray
-        }
-        
-        if loginView.passwordTextView.text.isEmpty {
-            loginView.passwordTextView.text = "비밀번호"
-            loginView.passwordTextView.textColor = .lightGray
-        }
     }
 }
 
