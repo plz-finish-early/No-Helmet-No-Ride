@@ -11,17 +11,16 @@ import SnapKit
 
 class LoginView: UIView {
     // MARK: - Property
-    let titleLabel = UILabel()
-    let iconImageView = UIImageView()
-    let subTitleLabel = UILabel()
-    let idTextField = UITextField()
-    let idUnderLineView = UIView()
-    let passwordTextView = UITextView()
-    let passwordTextField = UITextField()
-    let passwordUnderLineView = UIView()
-    let signUpButton = UIButton()
+    let titleLabel = UILabel() // 최상단 로그인 타이틀
+    let iconImageView = UIImageView() // 아이콘을 보여주는 ImageView
+    let subTitleLabel = UILabel() // 앱 이름 라벨
+    let idTextField = UITextField() // 아이디 입력 칸
+    let idUnderLineView = UIView() // 아이디 입력 칸 밑줄
+    let passwordTextField = UITextField() // 패스워드 입력 칸
+    let passwordUnderLineView = UIView() // 패스워드 입력 칸 밑줄
+    let signUpButton = UIButton() // 회원가입 버튼
     // 찬호박님 버튼, 로그인 버튼
-    let mainButton = MainButton(title: "로그인")
+    let mainButton = MainButton(title: "로그인") // 로그인 버튼
     
     // MARK: - Life Cycle
     override init(frame: CGRect) {
@@ -78,22 +77,21 @@ class LoginView: UIView {
         // 제약 설정
         self.subTitleLabel.snp.makeConstraints {
             $0.top.equalTo(iconImageView.snp.bottom).offset(12)
-            //$0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
             $0.centerX.equalTo(self.safeAreaLayoutGuide)
             $0.width.equalTo(214)
-            $0.height.equalTo(50)
+            $0.height.equalTo(52)
         }
         
         // idTextField 설정
         self.idTextField.font = .systemFont(ofSize: 17)
         self.idTextField.placeholder = "아이디"
-        //self.idTextField.
+        self.idTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         
         self.addSubview(self.idTextField)
         
         // 제약 설정
         self.idTextField.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(70)
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(32)
             $0.leading.equalTo(self.safeAreaLayoutGuide).offset(34)
             $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(13)
             $0.height.equalTo(44)
@@ -116,6 +114,7 @@ class LoginView: UIView {
         // passwordTextField 설정
         self.passwordTextField.font = .systemFont(ofSize: 17)
         self.passwordTextField.placeholder = "비밀번호"
+        self.passwordTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         
         self.addSubview(self.passwordTextField)
         
@@ -165,8 +164,8 @@ class LoginView: UIView {
             //$0.top.equalTo(signUpButton.snp.bottom).offset(168)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(10)
             $0.centerX.equalTo(self.safeAreaLayoutGuide)
-            $0.width.equalTo(350)
-            $0.height.equalTo(80)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(12)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
         }
     }
 }
