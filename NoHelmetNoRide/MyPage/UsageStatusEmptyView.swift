@@ -28,6 +28,7 @@ class UsageStatusEmptyView: UIView {
         label.numberOfLines = 2
         return label
     }()
+    
 
     let confirmButton = MainButton(title: "확인")
 

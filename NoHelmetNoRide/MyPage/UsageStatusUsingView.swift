@@ -158,6 +158,7 @@ class UsageStatusUsingView: UIView {
         confirmButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(12)
             make.bottom.equalTo(safeAreaLayoutGuide).inset(10)
+            
         }
     }
 }
