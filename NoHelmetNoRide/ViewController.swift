@@ -14,10 +14,9 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .main
         
-        let loginVc = LoginViewController()
-        let login = UINavigationController(rootViewController: loginVc)
+        let loginVC = LoginViewController()
         
-        setup(login)
+        setup(loginVC)
     }
     
     func setup(_ child: UIViewController) {
