@@ -57,7 +57,7 @@ class RegisteredKickboardCell: UITableViewCell {
         kickBoardIdLabel.text = "킥보드 ID:"
         kickBoardIdLabel.textColor = .font
         kickBoardIdLabel.textAlignment = .left
-        kickBoardIdLabel.font = .boldSystemFont(ofSize: 14)
+        kickBoardIdLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         
         addSubview(kickBoardIdLabel)
         
@@ -72,7 +72,7 @@ class RegisteredKickboardCell: UITableViewCell {
         kickBoardIdDataLabel.text = "test1234" // 테스트 용 값
         kickBoardIdDataLabel.textColor = .font
         kickBoardIdDataLabel.textAlignment = .left
-        kickBoardIdDataLabel.font = .boldSystemFont(ofSize: 14)
+        kickBoardIdDataLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         
         addSubview(kickBoardIdDataLabel)
         
