@@ -1,5 +1,5 @@
 //
-//  mainButton.swift
+//  MainButton.swift
 //  NoHelmetNoRide
 //
 //  Created by LCH on 4/28/25.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class mainButton: UIButton {
+class MainButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
