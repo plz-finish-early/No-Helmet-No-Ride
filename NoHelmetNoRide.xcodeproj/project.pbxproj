@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED344D592DBE416D00B24CF0 /* NMapsMap in Frameworks */ = {isa = PBXBuildFile; productRef = ED344D582DBE416D00B24CF0 /* NMapsMap */; };
 		ED8C401F2DBBA33F00502839 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED8C401E2DBBA33F00502839 /* SnapKit */; };
 		ED8C40212DBBA34200502839 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ED8C40202DBBA34200502839 /* Alamofire */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED8C401F2DBBA33F00502839 /* SnapKit in Frameworks */,
+				ED344D592DBE416D00B24CF0 /* NMapsMap in Frameworks */,
 				ED8C40212DBBA34200502839 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +132,7 @@
 			packageProductDependencies = (
 				ED8C401E2DBBA33F00502839 /* SnapKit */,
 				ED8C40202DBBA34200502839 /* Alamofire */,
+				ED344D582DBE416D00B24CF0 /* NMapsMap */,
 			);
 			productName = NoHelmetNoRide;
 			productReference = ED8C3FD72DBBA1E100502839 /* NoHelmetNoRide.app */;
@@ -210,6 +213,7 @@
 			packageReferences = (
 				ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				ED8C401C2DBBA33800502839 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				ED344D572DBE416500B24CF0 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ED8C3FD82DBBA1E100502839 /* Products */;
@@ -568,6 +572,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		ED344D572DBE416500B24CF0 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/navermaps/SPM-NMapsMap";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.21.0;
+			};
+		};
 		ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -587,6 +599,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		ED344D582DBE416D00B24CF0 /* NMapsMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED344D572DBE416500B24CF0 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */;
+			productName = NMapsMap;
+		};
 		ED8C401E2DBBA33F00502839 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */;

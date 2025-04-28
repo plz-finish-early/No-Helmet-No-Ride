@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NMapsMap
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // 네이버 맵 인증키 적용
+        NMFAuthManager.shared().ncpKeyId = "14njmv01hz"
         return true
     }
 
