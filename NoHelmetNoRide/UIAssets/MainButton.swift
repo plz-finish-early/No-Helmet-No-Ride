@@ -1,5 +1,5 @@
 //
-//  mainButton.swift
+//  MainButton.swift
 //  NoHelmetNoRide
 //
 //  Created by LCH on 4/28/25.
