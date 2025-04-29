@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B7879D02DC0EEA800679C89 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9B7879CF2DC0EEA800679C89 /* Config.xcconfig */; };
+		9B7879D32DC0F0A000679C89 /* NMapsMap in Frameworks */ = {isa = PBXBuildFile; productRef = 9B7879D22DC0F0A000679C89 /* NMapsMap */; };
 		ED8C401F2DBBA33F00502839 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED8C401E2DBBA33F00502839 /* SnapKit */; };
 		ED8C40212DBBA34200502839 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ED8C40202DBBA34200502839 /* Alamofire */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B7879CF2DC0EEA800679C89 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ED8C3FD72DBBA1E100502839 /* NoHelmetNoRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoHelmetNoRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8C3FED2DBBA1E300502839 /* NoHelmetNoRideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoHelmetNoRideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8C3FF72DBBA1E300502839 /* NoHelmetNoRideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoHelmetNoRideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED8C401F2DBBA33F00502839 /* SnapKit in Frameworks */,
+				9B7879D32DC0F0A000679C89 /* NMapsMap in Frameworks */,
 				ED8C40212DBBA34200502839 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +89,7 @@
 		ED8C3FCE2DBBA1E100502839 = {
 			isa = PBXGroup;
 			children = (
+				9B7879CF2DC0EEA800679C89 /* Config.xcconfig */,
 				ED8C3FD92DBBA1E100502839 /* NoHelmetNoRide */,
 				ED8C401D2DBBA33F00502839 /* Frameworks */,
 				ED8C3FD82DBBA1E100502839 /* Products */,
@@ -130,6 +135,7 @@
 			packageProductDependencies = (
 				ED8C401E2DBBA33F00502839 /* SnapKit */,
 				ED8C40202DBBA34200502839 /* Alamofire */,
+				9B7879D22DC0F0A000679C89 /* NMapsMap */,
 			);
 			productName = NoHelmetNoRide;
 			productReference = ED8C3FD72DBBA1E100502839 /* NoHelmetNoRide.app */;
@@ -210,6 +216,7 @@
 			packageReferences = (
 				ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				ED8C401C2DBBA33800502839 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9B7879D12DC0F0A000679C89 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ED8C3FD82DBBA1E100502839 /* Products */;
@@ -228,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B7879D02DC0EEA800679C89 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +295,7 @@
 /* Begin XCBuildConfiguration section */
 		ED8C40012DBBA1E300502839 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B7879CF2DC0EEA800679C89 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -314,6 +323,7 @@
 		};
 		ED8C40022DBBA1E300502839 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B7879CF2DC0EEA800679C89 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -568,6 +578,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9B7879D12DC0F0A000679C89 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/navermaps/SPM-NMapsMap";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.21.0;
+			};
+		};
 		ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -587,6 +605,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9B7879D22DC0F0A000679C89 /* NMapsMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B7879D12DC0F0A000679C89 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */;
+			productName = NMapsMap;
+		};
 		ED8C401E2DBBA33F00502839 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED8C401B2DBBA32600502839 /* XCRemoteSwiftPackageReference "SnapKit" */;
