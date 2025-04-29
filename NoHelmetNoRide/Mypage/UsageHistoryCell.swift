@@ -43,9 +43,9 @@ class UsageHistoryCell: UITableViewCell {
         
         logoImageView.image = .icon
         logoImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
             $0.leading.equalToSuperview().offset(19)
             $0.width.height.equalTo(18)
+            $0.centerY.equalTo(kickboardIdLabel.snp.centerY)
         }
         
         kickboardIdLabel.text = "킥보드 ID:"
