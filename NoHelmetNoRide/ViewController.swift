@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  NoHelmetNoRide
 //
-//  Created by NH on 4/25/25.
+//  Created by 전원식 on 4/28/25.
 //
 
 import UIKit
@@ -35,4 +35,3 @@ class ViewController: UIViewController {
         child.didMove(toParent: self)
     }
 }
-
