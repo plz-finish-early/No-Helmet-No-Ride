@@ -13,12 +13,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .main
-        
-<<<<<<< HEAD
-        
-    }
-    
-=======
+
         let loginVC = LoginViewController()
         
         setup(loginVC)
@@ -39,5 +34,4 @@ class ViewController: UIViewController {
         // 이 호출이 없으면 뷰 컨트롤러 라이프 사이클이 꼬일 수 있음.
         child.didMove(toParent: self)
     }
->>>>>>> Develop
 }
