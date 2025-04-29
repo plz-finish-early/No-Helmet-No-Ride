@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class mainButton: UIButton {
+class MainButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

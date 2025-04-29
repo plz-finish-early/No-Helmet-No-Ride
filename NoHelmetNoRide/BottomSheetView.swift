@@ -10,7 +10,7 @@ import UIKit
 class CustomBottomSheetView: UIView {
     
     let kickboardIDLabel = UILabel()
-    let kickboardRentButton = mainButton(title: "킥보드 이용하기")
+    let kickboardRentButton = MainButton(title: "킥보드 이용하기")
     let kickboardLabel = UILabel()
     let kickboardBatteryLabel = UILabel()
     let kickboardTimeLabel = UILabel()

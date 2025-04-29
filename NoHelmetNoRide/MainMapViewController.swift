@@ -54,7 +54,7 @@ class MainMapViewController: UIViewController {
             customSegmentedControl,
             bottomSheetView,
             ridingKickboardView,
-            usingKickboardButton
+           //usingKickboardButton
         ].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
