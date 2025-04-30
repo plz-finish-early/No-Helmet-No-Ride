@@ -14,8 +14,6 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = true // 네비게이션 바 숨기기
     }
     
     override func loadView() {
@@ -25,6 +23,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addButtonAction() // 버튼 액션 추가
+    }
+    
+    private func addButtonAction() {
+        loginView.signUpButton.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func didTappedButton() {
+        let modalVC = SignUpViewController() // 모달로 띄울 뷰 컨트롤러 설정
+        modalVC.modalPresentationStyle = .fullScreen // 풀 스크린 모달 스타일로 설정
+        self.present(modalVC, animated: true, completion: nil) // 모달 띄우기
     }
 }
 
