@@ -150,6 +150,7 @@ class SignUpView: UIView {
         self.passwordTextField.font = .systemFont(ofSize: 17)
         self.passwordTextField.placeholder = "비밀번호"
         self.passwordTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
+        self.passwordTextField.isSecureTextEntry = true // 문자열이 * 처리됨
         
         self.addSubview(passwordTextField)
         
@@ -161,7 +162,7 @@ class SignUpView: UIView {
             $0.height.equalTo(44)
         }
         
-        // 닉네임 밑줄
+        // 비밀번호 밑줄
         self.passwordUnderLineView.layer.borderWidth = 1
         self.passwordUnderLineView.layer.borderColor = UIColor.lightGray.cgColor
         
@@ -175,7 +176,7 @@ class SignUpView: UIView {
             $0.height.equalTo(1)
         }
         
-        // 닉네임 안내 글
+        // 비밀번호 안내 글
         self.guidePasswordLabel.text = "비밀번호는 영문과 숫자 10자리 내로 입력이 가능합니다."
         self.guidePasswordLabel.textColor = .font
         self.guidePasswordLabel.textAlignment = .left
@@ -194,6 +195,7 @@ class SignUpView: UIView {
         self.passwordCheckTextField.font = .systemFont(ofSize: 17)
         self.passwordCheckTextField.placeholder = "비밀번호 확인"
         self.passwordCheckTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
+        self.passwordCheckTextField.isSecureTextEntry = true // 문자열이 * 처리됨
         
         self.addSubview(passwordCheckTextField)
         
@@ -205,7 +207,7 @@ class SignUpView: UIView {
             $0.height.equalTo(44)
         }
         
-        // 닉네임 밑줄
+        // 비밀번호 확인 밑줄
         self.passwordCheckUnderLineView.layer.borderWidth = 1
         self.passwordCheckUnderLineView.layer.borderColor = UIColor.lightGray.cgColor
         
@@ -219,7 +221,7 @@ class SignUpView: UIView {
             $0.height.equalTo(1)
         }
         
-        // 닉네임 안내 글
+        // 비밀번호 확인 안내 글
         self.guidePasswordCheckLabel.text = "비밀번호가 일치하지 않습니다."
         self.guidePasswordCheckLabel.textColor = .font
         self.guidePasswordCheckLabel.textAlignment = .left
