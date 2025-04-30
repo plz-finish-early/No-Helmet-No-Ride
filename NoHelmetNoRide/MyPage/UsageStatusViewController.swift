@@ -26,7 +26,7 @@ class UsageStatusViewController: UIViewController {
     }
     
     private lazy var statusView: UIView = {
-        switch status {
+        switch self.status {
         case .using:
             let statusView = UsageStatusUsingView()
             return statusView
@@ -50,10 +50,21 @@ class UsageStatusViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigation()
+        addButtonAction()
     }
     
     func setupNavigation() {
         self.navigationItem.title = "이용 현황"
     }
     
+    func addButtonAction() {
+        if let usingView = statusView as? UsageStatusUsingView {
+            usingView.confirmButton.addTarget(self, action: #selector(didTappedConfirmButton), for: .touchUpInside)
+        }
+    }
+    
+    @objc
+    func didTappedConfirmButton() {
+        self.dismissModal()
+    }
 }

@@ -30,34 +30,34 @@ class MyPageViewController: UIViewController {
         addLogoutButtonAction()
     }
     
+    // 이용 내역
     func addHistoryButtonAction() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTappedHistoryButton))
         myPageView.historyStack.addGestureRecognizer(tap)
     }
     
-    // 새로 추가
     @objc func didTappedHistoryButton() {
         let usageHistoryViewController = UsageHistoryViewController()
         navigationController?.pushViewController(usageHistoryViewController, animated: true)
     }
     
+    // 이용 현황
     func addStatusButtonAction() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTappedStatusButton))
         myPageView.statusStack.addGestureRecognizer(tap)
     }
     
-    // 새로 추가
     @objc func didTappedStatusButton() {
         let usageStatusViewController = UsageStatusViewController(status: .using)
-        navigationController?.pushViewController(usageStatusViewController, animated: true)
+        presentModal(usageStatusViewController)
     }
     
+    // 등록된 킥보드
     func addKickboardButtonAction() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTappedKickboardButton))
         myPageView.kickboardStack.addGestureRecognizer(tap)
     }
     
-    // 새로 추가
     @objc func didTappedKickboardButton() {
         let registeredKickboardViewController = RegisteredKickboardViewController()
         navigationController?.pushViewController(registeredKickboardViewController, animated: true)
