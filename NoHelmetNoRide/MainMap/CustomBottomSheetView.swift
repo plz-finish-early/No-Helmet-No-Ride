@@ -9,6 +9,8 @@ import UIKit
 
 class CustomBottomSheetView: UIView {
     
+    weak var delegate: CustomBottomSheetViewDelegate?
+    
     let kickboardIDLabel = UILabel()
     let kickboardRentButton = MainButton(title: "킥보드 이용하기")
     let kickboardLabel = UILabel()
@@ -26,6 +28,11 @@ class CustomBottomSheetView: UIView {
         super.init(coder: coder)
         setupUI()
         setupConstraints()
+    }
+    
+    @objc func didTapClose() {
+        // 뷰 컨트롤러에 닫기 요청 전달
+        delegate?.didRequestHide()
     }
     
     private func setupUI() {
@@ -78,5 +85,8 @@ class CustomBottomSheetView: UIView {
             kickboardTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
         ])
     }
-    
+}
+
+protocol CustomBottomSheetViewDelegate: AnyObject {
+    func didRequestHide()
 }
