@@ -65,6 +65,6 @@ class UsageStatusViewController: UIViewController {
     
     @objc
     func didTappedConfirmButton() {
-        self.dismissModal()
+        navigationController?.popViewController(animated: true)
     }
 }

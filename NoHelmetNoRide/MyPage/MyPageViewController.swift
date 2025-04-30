@@ -49,7 +49,7 @@ class MyPageViewController: UIViewController {
     
     @objc func didTappedStatusButton() {
         let usageStatusViewController = UsageStatusViewController(status: .using)
-        presentModal(usageStatusViewController)
+        navigationController?.pushViewController(usageStatusViewController, animated: true)
     }
     
     // 등록된 킥보드
