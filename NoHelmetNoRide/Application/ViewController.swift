@@ -14,9 +14,10 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .main
 
+        // 로그인 화면으로 시작
         let loginVC = LoginViewController()
-        
-        setup(loginVC)
+        let vc = UINavigationController(rootViewController: loginVC)
+        setup(vc)
     }
     
     func setup(_ child: UIViewController) {

@@ -123,7 +123,7 @@ class LoginView: UIView {
         self.passwordTextField.snp.makeConstraints {
             $0.top.equalTo(idUnderLineView.snp.bottom).offset(32)
             $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(32)
             $0.height.equalTo(44)
         }
         
@@ -136,7 +136,7 @@ class LoginView: UIView {
         self.passwordUnderLineView.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom)
             $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(12)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(32)
             $0.height.equalTo(1)
         }
         
