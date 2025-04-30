@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func loadView() {
@@ -50,12 +52,23 @@ class LoginViewController: UIViewController {
         // TODO: 로그인 데이터가 맞으면 지도 화면으로 이동
         
         // TODO: 로그인 데이터가 맞지 않다면, 알림창 띄우기
-        let alert = UIAlertController(title: "로그인 실패", message: "로그인에 실패하였습니다.\n아이디와 비밀번호를 확인해주세요.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
-
-        alert.addAction(ok)
         
-        present(alert, animated: true, completion: nil)
+        // 테스트용
+        // 실패 알림창 띄우기
+//        let alert = UIAlertController(title: "로그인 실패", message: "로그인에 실패하였습니다.\n아이디와 비밀번호를 확인해주세요.", preferredStyle: .alert)
+//        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+//
+//        alert.addAction(ok)
+//        
+//        present(alert, animated: true, completion: nil)
+        
+        // 마이페이지로 넘어가기
+//        let vc = MyPageViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        // 매인 맵으로 넘어가기
+        let vc = MainViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
