@@ -116,6 +116,7 @@ class LoginView: UIView {
         self.passwordTextField.placeholder = "비밀번호"
         self.passwordTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         self.passwordTextField.isSecureTextEntry = true // 문자열이 * 처리됨
+        self.passwordTextField.textContentType = .oneTimeCode // auto fill 제한
         
         self.addSubview(self.passwordTextField)
         

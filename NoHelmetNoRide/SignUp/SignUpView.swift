@@ -151,6 +151,8 @@ class SignUpView: UIView {
         self.passwordTextField.placeholder = "비밀번호"
         self.passwordTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         self.passwordTextField.isSecureTextEntry = true // 문자열이 * 처리됨
+        self.passwordCheckTextField.textContentType = .oneTimeCode // auto fill 제한
+        
         
         self.addSubview(passwordTextField)
         
@@ -196,6 +198,7 @@ class SignUpView: UIView {
         self.passwordCheckTextField.placeholder = "비밀번호 확인"
         self.passwordCheckTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         self.passwordCheckTextField.isSecureTextEntry = true // 문자열이 * 처리됨
+        self.passwordCheckTextField.textContentType = .oneTimeCode // auto fill 제한
         
         self.addSubview(passwordCheckTextField)
         
