@@ -26,6 +26,7 @@ class SignUpView: UIView {
     let passwordCheckTextField = UITextField()
     let passwordCheckUnderLineView = UIView()
     let guidePasswordCheckLabel = UILabel()
+    let cancelButton = UIButton()
     let mainButton = MainButton(title: "회원가입")
     
     // MARK: - Life Cycle
@@ -230,6 +231,21 @@ class SignUpView: UIView {
         guidePasswordCheckLabel.snp.makeConstraints {
             $0.top.equalTo(passwordCheckUnderLineView.snp.bottom).offset(8)
             $0.leading.equalTo(self.safeAreaLayoutGuide).offset(32)
+            $0.height.equalTo(22)
+        }
+        
+        // cancelButton
+        self.cancelButton.setTitle("가입 취소", for: .normal)
+        self.cancelButton.setTitleColor(UIColor(cgColor: .init(red: 0, green: 0, blue: 0, alpha: 0.3)), for: .normal)
+        self.cancelButton.backgroundColor = .white
+        self.cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        
+        self.addSubview(cancelButton)
+        
+        // 제약 설정
+        self.cancelButton.snp.makeConstraints {
+            $0.top.equalTo(guidePasswordCheckLabel.snp.bottom).offset(72)
+            $0.centerX.equalTo(self.safeAreaLayoutGuide)
             $0.height.equalTo(22)
         }
         
