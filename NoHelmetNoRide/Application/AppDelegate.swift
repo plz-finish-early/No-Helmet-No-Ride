@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        registerTestUserIfNeeded() // 테스트 함수
         return true
     }
     
@@ -42,46 +41,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-    
-    
-    // 테스트용 데이터 등록 함수
-    
-    private func registerTestUserIfNeeded() {
-        let context = persistentContainer.viewContext
-        
-        // 기존 유저 초기화
-        let users = try? context.fetch(AppUser.fetchRequest())
-        users?.forEach { context.delete($0) }
-        
-        let kickboards = try? context.fetch(KickboardData.fetchRequest())
-        kickboards?.forEach { context.delete($0) }
-        
-        do {
-            try context.save()
-        } catch {
-            print("초기화 실패: \(error)")
-        }
-        
-        CoreDataManager.shared.createAppUser(userID: "testUser", nickName: "홍길동", password: "1234")
-        
-        CoreDataManager.shared.createUserUsageInfo(
-            userID: "testUser",
-            kickboardID: "K001",
-            usageDate: Date(),
-            usageTime: 18.5,
-            usageDistance: 2600,
-            usageAmount: 1500
-        )
-        
-        CoreDataManager.shared.createKickboardData(
-            kickboardID: "K001",
-            isRidingKickboard: true, 
-            registrationDate: Date(),
-            totalUsageTime: 18.5,
-            totalUsageDistance: 2600,
-            kickboardBatteryAmount: 87
-        )
-        
-        print("테스트 유저 & 킥보드 등록 완료")
-    }
 }

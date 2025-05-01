@@ -16,28 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        //window.rootViewController = LoginViewController()
-        
-        // 시작화면을 LaunchScreen 스플래시 화면으로 설정
-//        window.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+        window.rootViewController = SplashViewController()
         window.makeKeyAndVisible()
-        
-        //window.rootViewController = ViewController()
-        
-        // 스플래시 화면 애니매이션 효과 설정
-        func animateFadeOutAndSwitchToMain() {
-            // 1초 동안 흐려지게
-            UIView.animate(withDuration: 1.0, animations: {
-                window.alpha = 0
-            }) { _ in
-                // 애니매이션 효과가 끝나면 ViewController() 가 루트 뷰로 설정
-                window.rootViewController = UINavigationController(rootViewController: LoginViewController())
-                window.makeKeyAndVisible()
-                UIView.animate(withDuration: 1.0, animations: {
-                    window.alpha = 1
-                })
-            }
-        }
         
         self.window = window
     }
