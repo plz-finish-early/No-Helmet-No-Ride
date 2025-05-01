@@ -161,4 +161,31 @@ class UsageStatusUsingView: UIView {
             
         }
     }
+    
+}
+
+// 킥보드 정보를 라벨에 뿌려주는 데이터 바인딩 함수
+
+extension UsageStatusUsingView {
+    func configure(with kickboard: KickboardData) {
+        // 킥보드 ID
+        self.kickboardIDLabel.text = kickboard.kickboardID ?? "알 수 없음"
+
+        // 등록 날짜
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        if let date = kickboard.registrationDate {
+            self.dateValueLabel.text = formatter.string(from: date)
+        } else {
+            self.dateValueLabel.text = "날짜 없음"
+        }
+
+        // 운행 시간 및 거리
+        let minutes = Int(kickboard.totalUsageTime)
+        let km = Double(kickboard.totalUsageDistance) / 1000.0
+        self.timeDistanceValueLabel.text = "\(minutes) 분\n\(String(format: "%.2f", km)) KM"
+
+        // 요금은 없으니 기본값
+        self.feeValueLabel.text = "KRW 00000 원"
+    }
 }

@@ -15,6 +15,7 @@ enum Status {
 class UsageStatusViewController: UIViewController {
     
     let status: Status
+    var kickboard: KickboardData?
     
     init(status: Status) {
         self.status = status
@@ -51,6 +52,12 @@ class UsageStatusViewController: UIViewController {
         
         setupNavigation()
         addButtonAction()
+        
+        if status == .using,
+              let usingView = statusView as? UsageStatusUsingView,
+              let kickboard = kickboard {
+               usingView.configure(with: kickboard)
+           }
     }
     
     func setupNavigation() {

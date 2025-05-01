@@ -42,6 +42,10 @@ class MyPageViewController: UIViewController {
     
     @objc func didTappedHistoryButton() {
         let usageHistoryViewController = UsageHistoryViewController()
+        let testUserID = "testUser"
+        let usageList = CoreDataManager.shared.fetchUsageInfos(for: testUserID)
+        usageHistoryViewController.usageHistoryList = usageList
+ 
         navigationController?.pushViewController(usageHistoryViewController, animated: true)
     }
     
@@ -52,7 +56,14 @@ class MyPageViewController: UIViewController {
     }
     
     @objc func didTappedStatusButton() {
-        let usageStatusViewController = UsageStatusViewController(status: .using)
+        let inUseKickboards = CoreDataManager.shared.fetchInUseKickboards()
+        let status: Status = inUseKickboards.isEmpty ? .empty : .using
+        let usageStatusViewController = UsageStatusViewController(status: status)
+        
+        if let kickboard = inUseKickboards.first {
+               usageStatusViewController.kickboard = kickboard
+           }
+        
         navigationController?.pushViewController(usageStatusViewController, animated: true)
     }
     
@@ -64,6 +75,7 @@ class MyPageViewController: UIViewController {
     
     @objc func didTappedKickboardButton() {
         let registeredKickboardViewController = RegisteredKickboardViewController()
+        registeredKickboardViewController.kickboardList = CoreDataManager.shared.fetchKickboardData()
         navigationController?.pushViewController(registeredKickboardViewController, animated: true)
     }
     
