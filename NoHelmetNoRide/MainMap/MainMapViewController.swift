@@ -127,8 +127,13 @@ class MainMapViewController: BaseMapViewController {
 
 // MARK: - Bottom Sheet Delegate
 extension MainMapViewController: CustomBottomSheetViewDelegate {
+
     func didRequestHide() {
         hideBottomSheet()
+    }
+    
+    func didChangeRentalState(isRenting: Bool) {
+        ridingKickboardView.ridingKickboardLabel.backgroundColor = isRenting ? .sub2 : .systemGray5
     }
 }
 

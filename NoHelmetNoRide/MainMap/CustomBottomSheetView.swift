@@ -11,6 +11,12 @@ class CustomBottomSheetView: UIView {
     
     weak var delegate: CustomBottomSheetViewDelegate?
     
+    private var isRenting: Bool = false {
+        didSet {
+            updateUIForRentalState()
+        }
+    }
+    
     let kickboardIDLabel = UILabel()
     let kickboardRentButton = MainButton(title: "킥보드 이용하기")
     let kickboardLabel = UILabel()
@@ -35,11 +41,23 @@ class CustomBottomSheetView: UIView {
         delegate?.didRequestHide()
     }
     
+    private func updateUIForRentalState() {
+        kickboardTimeLabel.isHidden = !isRenting
+        kickboardRentButton.setTitle(isRenting ? "킥보드 반납하기" : "킥보드 이용하기", for: .normal)
+        delegate?.didChangeRentalState(isRenting: isRenting)
+    }
+    
+    @objc private func didTapRentButton() {
+        isRenting.toggle()
+    }
+    
     private func setupUI() {
         backgroundColor = .systemGray5
         layer.cornerRadius = 16
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.masksToBounds = true
+        
+        kickboardRentButton.addTarget(self, action: #selector(didTapRentButton), for: .touchUpInside)
         
         kickboardIDLabel.text = "킥보드 ID"
         kickboardIDLabel.font = .systemFont(ofSize: 24, weight: .thin)
@@ -50,6 +68,7 @@ class CustomBottomSheetView: UIView {
         kickboardBatteryLabel.text = "배터리 잔량: nn%"
         kickboardBatteryLabel.font = .systemFont(ofSize: 14, weight: .thin)
         
+        kickboardTimeLabel.isHidden = true
         kickboardTimeLabel.text = "사용 시간: nn분"
         kickboardTimeLabel.font = .systemFont(ofSize: 14, weight: .thin)
     }
@@ -89,4 +108,5 @@ class CustomBottomSheetView: UIView {
 
 protocol CustomBottomSheetViewDelegate: AnyObject {
     func didRequestHide()
+    func didChangeRentalState(isRenting: Bool)
 }

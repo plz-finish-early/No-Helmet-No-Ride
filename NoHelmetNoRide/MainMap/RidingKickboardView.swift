@@ -26,6 +26,7 @@ class RidingKickboardView: UIView {
     }
     
     private func setupUI() {
+        
         ridingKickboardLabel.backgroundColor = .systemGray5
         ridingKickboardLabel.text = "킥보드 탑승중"
         ridingKickboardLabel.font = .systemFont(ofSize: 13, weight: .regular)

@@ -112,6 +112,7 @@ extension BaseMapViewController: NMFMapViewTouchDelegate {
 
         // 마커에 정보 저장
         marker.userInfo = [
+            //나중에 데이터 연결하고 킥보드ID 등 들어가야 하는 데이터로 변환하면 됨!!
             "title": "킥보드 위치",
             "address": "서울시 강남구"
         ]
