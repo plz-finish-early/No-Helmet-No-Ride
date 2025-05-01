@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-        <string>$(APIKey)</string>
     <dict>
         <key>NMFNcpKeyId</key>
         <string>$(APIKey)</string>
-	    <key>APISecret</key>
-	    <string>$(APISecret)</string>
+        <key>APISecret</key>
+        <string>$(APISecret)</string>
         <key>NSLocationAlwaysUsageDescription</key>
         <string>사용자의 위치를 받습니다.</string>
         <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
