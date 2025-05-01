@@ -8,11 +8,14 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
+    static let shared = LoginViewController()
     let coreDataManager = CoreDataManager.self
     
     let loginView = LoginView()
     
+    var loginUserID = ""
+    var loginNickName = ""
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -83,6 +86,14 @@ class LoginViewController: UIViewController {
         }
         
         print(result)
+        guard let userID = result.userID else {
+            print("아이디 검증")
+            return
+        }
+        print("로그인 아이디: \(userID)")
+        
+        LoginViewController.shared.loginUserID = userID
+        LoginViewController.shared.loginNickName = result.nickName ?? ""
         
         // 메인 뷰로 이동
         let vc = MainViewController()
