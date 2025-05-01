@@ -2,7 +2,7 @@
 //  UserUsageInfo+CoreDataProperties.swift
 //  NoHelmetNoRide
 //
-//  Created by 전원식 on 4/30/25.
+//  Created by 전원식 on 5/1/25.
 //
 //
 
@@ -16,12 +16,12 @@ extension UserUsageInfo {
         return NSFetchRequest<UserUsageInfo>(entityName: "UserUsageInfo")
     }
 
-    @NSManaged public var userID: String?
     @NSManaged public var kickboardID: String?
-    @NSManaged public var usageDate: Date?
-    @NSManaged public var usageTime: Double
-    @NSManaged public var usageDistance: Int32
     @NSManaged public var usageAmount: Int32
+    @NSManaged public var usageDate: Date?
+    @NSManaged public var usageDistance: Int32
+    @NSManaged public var usageTime: Double
+    @NSManaged public var userID: String?
 
 }
 

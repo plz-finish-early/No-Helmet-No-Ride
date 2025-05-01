@@ -42,7 +42,7 @@ final class CoreDataManager {
     }
 
     /// 킥보드 등록
-    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16) {
+    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16, userID: String) {
         if isKickboardRegistered(kickboardID: kickboardID) {
             print("이미 등록된 킥보드입니다.")
             return
@@ -54,6 +54,7 @@ final class CoreDataManager {
         kickboard.totalUsageTime = totalUsageTime
         kickboard.totalUsageDistance = totalUsageDistance
         kickboard.kickboardBatteryAmount = kickboardBatteryAmount
+        kickboard.userID = userID
         saveContext()
     }
 
@@ -96,8 +97,9 @@ final class CoreDataManager {
     }
 
     /// 등록된 킥보드 전체 조회
-    func fetchKickboardData() -> [KickboardData] {
+    func fetchKickboardData(for userID: String) -> [KickboardData] {
         let request: NSFetchRequest<KickboardData> = KickboardData.fetchRequest()
+        request.predicate = NSPredicate(format: "userID == %@", userID)
         do {
             return try context.fetch(request)
         } catch {
@@ -105,11 +107,10 @@ final class CoreDataManager {
             return []
         }
     }
-
     /// 현재 대여중인 킥보드 조회
-    func fetchInUseKickboards() -> [KickboardData] {
+    func fetchInUseKickboards(for userID: String) -> [KickboardData] {
         let request: NSFetchRequest<KickboardData> = KickboardData.fetchRequest()
-        request.predicate = NSPredicate(format: "isRidingKickboard == true")
+        request.predicate = NSPredicate(format: "isRidingKickboard == true AND userID == %@", userID)
         do {
             return try context.fetch(request)
         } catch {
@@ -117,7 +118,6 @@ final class CoreDataManager {
             return []
         }
     }
-
     /// 등록된 킥보드 중복 확인
     func isKickboardRegistered(kickboardID: String) -> Bool {
         let request: NSFetchRequest<KickboardData> = KickboardData.fetchRequest()

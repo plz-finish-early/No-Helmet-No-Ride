@@ -94,6 +94,26 @@ final class LoginViewController: UIViewController {
         
         LoginViewController.shared.loginUserID = userID
         LoginViewController.shared.loginNickName = result.nickName ?? ""
+
+        // 테스트용 데이터 삽입
+        CoreDataManager.shared.createKickboardData(
+            kickboardID: "K001",
+            isRidingKickboard: true,
+            registrationDate: Date(),
+            totalUsageTime: 18.5,
+            totalUsageDistance: 2600,
+            kickboardBatteryAmount: 87,
+            userID: userID
+        )
+
+        CoreDataManager.shared.createUserUsageInfo(
+            userID: userID,
+            kickboardID: "K001",
+            usageDate: Date(),
+            usageTime: 18.5,
+            usageDistance: 2600,
+            usageAmount: 1500
+        )
         
         // 메인 뷰로 이동
         let vc = MainViewController()

@@ -2,7 +2,7 @@
 //  AppUser+CoreDataProperties.swift
 //  NoHelmetNoRide
 //
-//  Created by 전원식 on 4/30/25.
+//  Created by 전원식 on 5/1/25.
 //
 //
 
@@ -16,10 +16,10 @@ extension AppUser {
         return NSFetchRequest<AppUser>(entityName: "AppUser")
     }
 
-    @NSManaged public var userID: String?
+    @NSManaged public var kickboardID: String?
     @NSManaged public var nickName: String?
     @NSManaged public var password: String?
-    @NSManaged public var kickboardID: String?
+    @NSManaged public var userID: String?
 
 }
 

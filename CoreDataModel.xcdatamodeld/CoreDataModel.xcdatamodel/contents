@@ -13,6 +13,7 @@
         <attribute name="registrationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalUsageDistance" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalUsageTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String"/>
     </entity>
     <entity name="UserUsageInfo" representedClassName=".UserUsageInfo" syncable="YES">
         <attribute name="kickboardID" optional="YES" attributeType="String"/>
