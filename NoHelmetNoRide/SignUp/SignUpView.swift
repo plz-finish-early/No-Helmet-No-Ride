@@ -61,6 +61,7 @@ class SignUpView: UIView {
         self.idTextField.font = .systemFont(ofSize: 17)
         self.idTextField.placeholder = "아이디"
         self.idTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
+        self.idTextField.autocapitalizationType = .none // 첫 영문자를 항상 소문자로 시작
         
         self.addSubview(idTextField)
         
@@ -106,6 +107,7 @@ class SignUpView: UIView {
         self.nickNameTextField.font = .systemFont(ofSize: 17)
         self.nickNameTextField.placeholder = "닉네임"
         self.nickNameTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
+        self.nickNameTextField.autocapitalizationType = .none // 첫 영문자를 항상 소문자로 시작
         
         self.addSubview(nickNameTextField)
         
@@ -151,7 +153,8 @@ class SignUpView: UIView {
         self.passwordTextField.placeholder = "비밀번호"
         self.passwordTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         self.passwordTextField.isSecureTextEntry = true // 문자열이 * 처리됨
-        self.passwordCheckTextField.textContentType = .oneTimeCode // auto fill 제한
+        self.passwordTextField.textContentType = .oneTimeCode // auto fill 제한
+        self.passwordTextField.autocapitalizationType = .none // 첫 영문자를 항상 소문자로 시작
         
         
         self.addSubview(passwordTextField)
@@ -199,6 +202,7 @@ class SignUpView: UIView {
         self.passwordCheckTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         self.passwordCheckTextField.isSecureTextEntry = true // 문자열이 * 처리됨
         self.passwordCheckTextField.textContentType = .oneTimeCode // auto fill 제한
+        self.passwordCheckTextField.autocapitalizationType = .none // 첫 영문자를 항상 소문자로 시작
         
         self.addSubview(passwordCheckTextField)
         

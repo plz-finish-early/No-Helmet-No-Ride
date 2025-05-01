@@ -86,6 +86,7 @@ class LoginView: UIView {
         self.idTextField.font = .systemFont(ofSize: 17)
         self.idTextField.placeholder = "아이디"
         self.idTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
+        self.idTextField.autocapitalizationType = .none // 첫 영문자를 항상 소문자로 시작
         
         self.addSubview(self.idTextField)
         
@@ -117,6 +118,7 @@ class LoginView: UIView {
         self.passwordTextField.clearButtonMode = .whileEditing // 입력 중 x 버튼 생성
         self.passwordTextField.isSecureTextEntry = true // 문자열이 * 처리됨
         self.passwordTextField.textContentType = .oneTimeCode // auto fill 제한
+        self.passwordTextField.autocapitalizationType = .none // 첫 영문자를 항상 소문자로 시작
         
         self.addSubview(self.passwordTextField)
         
