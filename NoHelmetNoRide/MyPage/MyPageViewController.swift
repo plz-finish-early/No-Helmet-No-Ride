@@ -28,6 +28,9 @@ class MyPageViewController: UIViewController {
         addStatusButtonAction()
         addKickboardButtonAction()
         addLogoutButtonAction()
+        
+        // 마이페이지 닉네임을 로그인 계정의 닉네임으로 변경
+        myPageView.nameLabel.text = LoginViewController.shared.loginNickName
     }
     
     // 이용 내역

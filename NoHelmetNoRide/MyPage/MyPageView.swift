@@ -13,7 +13,7 @@ class MyPageView: UIView {
     // MARK: - UI 요소
 
 
-    private let nameLabel: UILabel = {
+    public let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "이정진레모니 님"
         label.font = .systemFont(ofSize: 28, weight: .bold)
