@@ -10,8 +10,6 @@ import UIKit
 import CoreData
 
 class SignUpViewController: UIViewController {
-    let coreDataManager = CoreDataManager.self
-    
     let signUpView = SignUpView()
     
     override func loadView() {
@@ -83,9 +81,21 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        // 회원 가입 정보 저장
-        coreDataManager.shared.createAppUser(userID: id, nickName: nickName, password: password)
+        let result = CoreDataManager.shared.fetchUserID(userID: id)
+        if result != nil {
+                let alert = UIAlertController(title: "회원 가입 실패", message: "이미 등록된 아이디 입니다.", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                
+                present(alert, animated: true, completion: nil)
+            return
+        }
         
+        // 회원 가입 정보 저장
+        CoreDataManager.shared.createAppUser(userID: id, nickName: nickName, password: password)
+        print("가입 완료")
+        
+        // 테스트 용
         // 데이터 읽기
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let request: NSFetchRequest<AppUser> = AppUser.fetchRequest()
@@ -95,14 +105,14 @@ class SignUpViewController: UIViewController {
             print("Login Fetch Failed: \(error)")
         }
         // 테스트 용
-//        let alert = UIAlertController(title: "가입 완료", message: "회원 가입이 완료되었습니다.\n로그인 화면으로 이동합니다.", preferredStyle: .alert)
-//        let ok = UIAlertAction(title: "확인", style: .default) { action in
-//            self.dismissModal() // 모달 창 내리기
-//        }
-//
-//        alert.addAction(ok)
-//        
-//        present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "가입 완료", message: "회원 가입이 완료되었습니다.\n로그인 화면으로 이동합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default) { action in
+            self.dismissModal() // 모달 창 내리기
+        }
+
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
         
         //self.dismissModal() // 모달 창 내리기
         
