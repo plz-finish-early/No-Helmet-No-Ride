@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class KickboardRegistrationWithMap: UIViewController {
+class KickboardRegistrationWithMap: BaseMapViewController {
     
     let topLabel: UILabel = {
         let label = UILabel()
@@ -20,15 +20,17 @@ class KickboardRegistrationWithMap: UIViewController {
         return label
     }()
     
-    let mapview: UIView = {
-        let uiView = UIView()
-        uiView.backgroundColor = .white
-        return uiView
+    let centerPin: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "pin")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .black
+        return imageView
     }()
     
-    lazy private var nextButton: UIButton = {
-        let button = MainButton(title: "다음")
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    lazy private var registerButton: UIButton = {
+        let button = UsingKickboardButton(title: "킥보드 등록하기")
+        button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -40,9 +42,9 @@ class KickboardRegistrationWithMap: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         [
-            mapview,
             topLabel,
-            nextButton
+            centerPin,
+            registerButton
         ].forEach{ view.addSubview($0) }
         
         topLabel.snp.makeConstraints {
@@ -51,17 +53,38 @@ class KickboardRegistrationWithMap: UIViewController {
             $0.horizontalEdges.equalToSuperview().inset(88)
         }
         
-        mapview.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        centerPin.snp.makeConstraints {
+            let height = 30
+            $0.width.equalTo(30)
+            $0.height.equalTo(height)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(0 - height/2)
         }
-        
-        nextButton.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(12)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+
+        registerButton.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     
-    @objc private func nextButtonTapped() {
-        print("nextButtonTapped")
+    @objc private func registerButtonTapped() {
+        
+        let coordinate = self.getCenterofMap()
+        let kickboardRegistrationViewController = KickboardRegistrationViewController()
+        
+        kickboardRegistrationViewController.coordinate = (coordinate.lat, coordinate.lng)
+        kickboardRegistrationViewController.delegate = self
+        kickboardRegistrationViewController.modalPresentationStyle = .formSheet
+        self.present(kickboardRegistrationViewController, animated: true)
+    }
+}
+
+
+extension KickboardRegistrationWithMap: RegisterViewDismissDelegate {
+    func dismiss() {
+        self.updateData()
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
+        }
     }
 }
