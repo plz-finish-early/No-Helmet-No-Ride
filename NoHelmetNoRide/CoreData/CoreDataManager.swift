@@ -42,12 +42,13 @@ final class CoreDataManager {
     }
 
     /// 킥보드 등록
-    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16, lat: Double, lng: Double) {
+    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16, lat: Double, lng: Double, userID: String) {
         if isKickboardRegistered(kickboardID: kickboardID) {
             print("이미 등록된 킥보드입니다.")
             return
         }
         let kickboard = KickboardData(context: context)
+        kickboard.userID = userID
         kickboard.kickboardID = kickboardID
         kickboard.isRidingKickboard = isRidingKickboard
         kickboard.registrationDate = registrationDate
@@ -56,6 +57,7 @@ final class CoreDataManager {
         kickboard.kickboardBatteryAmount = kickboardBatteryAmount
         kickboard.lat = lat
         kickboard.lng = lng
+        kickboard.userID = userID
         saveContext()
     }
 
@@ -109,13 +111,31 @@ final class CoreDataManager {
     }
 
     /// 현재 대여중인 킥보드 조회
-    func fetchInUseKickboards() -> [KickboardData] {
+    func fetchInUseKickboards(for userID: String) -> KickboardData? {
+        let request: NSFetchRequest<AppUser> = AppUser.fetchRequest()
+        request.predicate = NSPredicate(format: "userID == %@", userID)
+
+        do {
+            if let user = try context.fetch(request).first,
+               let kickboardID = user.kickboardID {
+                let kickboardRequest: NSFetchRequest<KickboardData> = KickboardData.fetchRequest()
+                kickboardRequest.predicate = NSPredicate(format: "kickboardID == %@", kickboardID)
+                return try context.fetch(kickboardRequest).first
+            }
+        } catch {
+            print("fetchInUseKickboard error: \(error)")
+        }
+        return nil
+    }
+    
+    // 등록한 킥보드 목록 조회
+    func fetchKickboardData(for userID: String) -> [KickboardData] {
         let request: NSFetchRequest<KickboardData> = KickboardData.fetchRequest()
-        request.predicate = NSPredicate(format: "isRidingKickboard == true")
+        request.predicate = NSPredicate(format: "userID == %@", userID)
         do {
             return try context.fetch(request)
         } catch {
-            print("In-use Kickboard Fetch Failed: \(error)")
+            print("fetchKickboardData(for:) 실패: \(error)")
             return []
         }
     }
@@ -130,6 +150,8 @@ final class CoreDataManager {
             return false
         }
     }
+    
+    
 
     // MARK: - Update
 

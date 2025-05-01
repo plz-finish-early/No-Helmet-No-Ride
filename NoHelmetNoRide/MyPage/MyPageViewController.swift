@@ -56,15 +56,16 @@ class MyPageViewController: UIViewController {
     }
     
     @objc func didTappedStatusButton() {
-        let inUseKickboards = CoreDataManager.shared.fetchInUseKickboards()
-        let status: Status = inUseKickboards.isEmpty ? .empty : .using
-        let usageStatusViewController = UsageStatusViewController(status: status)
+        let currentUserID = LoginViewController.shared.loginUserID
         
-        if let kickboard = inUseKickboards.first {
-               usageStatusViewController.kickboard = kickboard
-           }
-        
-        navigationController?.pushViewController(usageStatusViewController, animated: true)
+        if let kickboard = CoreDataManager.shared.fetchInUseKickboards(for: currentUserID) {
+            let vc = UsageStatusViewController(status: .using)
+            vc.kickboard = kickboard
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = UsageStatusViewController(status: .empty)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     // 등록된 킥보드

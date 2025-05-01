@@ -2,7 +2,7 @@
 //  KickboardData+CoreDataProperties.swift
 //  NoHelmetNoRide
 //
-//  Created by 전원식 on 4/30/25.
+//  Created by 전원식 on 5/2/25.
 //
 //
 
@@ -16,14 +16,15 @@ extension KickboardData {
         return NSFetchRequest<KickboardData>(entityName: "KickboardData")
     }
 
-    @NSManaged public var kickboardID: String?
     @NSManaged public var isRidingKickboard: Bool
-    @NSManaged public var registrationDate: Date?
-    @NSManaged public var totalUsageTime: Double
-    @NSManaged public var totalUsageDistance: Int32
     @NSManaged public var kickboardBatteryAmount: Int16
+    @NSManaged public var kickboardID: String?
     @NSManaged public var lat: Double
     @NSManaged public var lng: Double
+    @NSManaged public var registrationDate: Date?
+    @NSManaged public var totalUsageDistance: Int32
+    @NSManaged public var totalUsageTime: Double
+    @NSManaged public var userID: String?
 
 }
 

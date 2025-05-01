@@ -130,12 +130,22 @@ extension MainMapViewController: CustomBottomSheetViewDelegate {
     func didChangeRentalState(isRenting: Bool) {
         ridingKickboardView.ridingKickboardLabel.backgroundColor = isRenting ? .sub2 : .systemGray5
     }
+    
+    func presentInvoiceViewController(_ vc: UsageInvoiceViewController) {
+          vc.modalPresentationStyle = .overFullScreen
+          present(vc, animated: true)
+      }
 }
 
 // MARK: - Map Interaction Delegate
 extension MainMapViewController: MapViewDelegate {
     func didTapMarker(title: String, kickboardID: String, battery: Int16) {
         showBottomSheet()
+        
+        bottomSheetView.configureKickboard(
+                id: kickboardID,
+                battery: Int(battery)
+            )
     }
     
     func didTapMap() {

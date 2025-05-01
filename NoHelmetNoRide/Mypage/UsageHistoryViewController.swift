@@ -25,6 +25,11 @@ class UsageHistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+
+        // 등록한 유저아이디 데이터로 이용내역 나타냄
+        let currentUserID = LoginViewController.shared.loginUserID
+        usageHistoryList = CoreDataManager.shared.fetchUsageInfos(for: currentUserID)
+        usageHistoryView.tableView.reloadData()
     }
     
     private func setupNavigation() {

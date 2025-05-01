@@ -85,11 +85,65 @@ class CustomBottomSheetView: UIView {
     
     @objc private func didTapRentButton() {
         if isRenting == false {
+            // 대여 시작
             isRenting.toggle()
             showSafetyInstructions()
+
+            // 유저에 킥보드 연결
+            let userID = LoginViewController.shared.loginUserID
+            if let user = CoreDataManager.shared.fetchUserID(userID: userID) {
+                CoreDataManager.shared.assignKickboardToUser(user: user, kickboardID: kickboardIDLabel.text ?? "")
+            }
+
+            // 킥보드 상태도 업데이트
+            if let kickboard = CoreDataManager.shared.fetchKickboardData().first(where: {
+                $0.kickboardID == kickboardIDLabel.text
+            }) {
+                CoreDataManager.shared.setKickboardInUse(kickboard: kickboard)
+            }
+
         } else {
+            // 반납
             isRenting.toggle()
-            showUsageInvoiceView()
+
+            let usageTime = Date().timeIntervalSince(startTime ?? Date())
+            let usageDistance: Int32 = 2600
+            let usageAmount: Int32 = 1500
+
+            let userID = LoginViewController.shared.loginUserID
+            let kickboardID = kickboardIDLabel.text ?? "알 수 없음"
+
+            CoreDataManager.shared.createUserUsageInfo(
+                userID: userID,
+                kickboardID: kickboardID,
+                usageDate: Date(),
+                usageTime: usageTime,
+                usageDistance: usageDistance,
+                usageAmount: usageAmount
+            )
+
+            // 반납된 킥보드 정보 업데이트 (상태, 거리, 시간)
+            if let kickboard = CoreDataManager.shared.fetchKickboardData().first(where: {
+                $0.kickboardID == kickboardID
+            }) {
+                CoreDataManager.shared.updateKickboardAfterUse(
+                    kickboard: kickboard,
+                    addedTime: usageTime,
+                    addedDistance: usageDistance
+                )
+            }
+
+            // 유저에서 킥보드 연결 해제
+            if let user = CoreDataManager.shared.fetchUserID(userID: userID) {
+                CoreDataManager.shared.unassignKickboardFromUser(user: user)
+            }
+
+            let usageList = CoreDataManager.shared.fetchUsageInfos(for: userID)
+            guard let latestUsage = usageList.last else { return }
+
+            let invoiceVC = UsageInvoiceViewController()
+            invoiceVC.usageInfo = latestUsage
+            delegate?.presentInvoiceViewController(invoiceVC)
         }
     }
     
@@ -161,6 +215,11 @@ class CustomBottomSheetView: UIView {
             $0.bottom.equalTo(kickboardBatteryLabel.snp.top).offset(-8)
         }
     }
+    
+    func configureKickboard(id: String, battery: Int) {
+        kickboardIDLabel.text = id
+        kickboardBatteryLabel.text = "배터리 잔량: \(battery)%"
+    }
 }
 
 protocol CustomBottomSheetViewDelegate: AnyObject {
@@ -168,4 +227,5 @@ protocol CustomBottomSheetViewDelegate: AnyObject {
     func didChangeRentalState(isRenting: Bool)
     func didRequestShowSafetyInstructions()
     func didRequestShowUsageInvoiceView()
+    func presentInvoiceViewController(_ vc: UsageInvoiceViewController)
 }

@@ -77,7 +77,8 @@ class KickboardRegistrationViewController: UIViewController {
             totalUsageDistance: 0,
             kickboardBatteryAmount: 100,
             lat: coordinate.lat,
-            lng: coordinate.lng
+            lng: coordinate.lng,
+            userID: LoginViewController.shared.loginUserID
         )
         
         let alert = UIAlertController(title: "등록완료",
