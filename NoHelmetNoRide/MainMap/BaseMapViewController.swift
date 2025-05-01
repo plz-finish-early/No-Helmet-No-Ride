@@ -159,7 +159,7 @@ extension BaseMapViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         delegate?.didTapMap()
         print("지도 탭: \(latlng.lat), \(latlng.lng)")
-
+        /*
         // 마커 추가 예시 (원한다면)
         lat = latlng.lat
         lng = latlng.lng
