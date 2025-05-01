@@ -20,7 +20,6 @@ class MyPageView: UIView {
         label.textColor = .black
         return label
     }()
-
     
     // 원본 (원식님)
 //    private let historyStack = MyPageView.makeRowStack(title: "이용 내역")

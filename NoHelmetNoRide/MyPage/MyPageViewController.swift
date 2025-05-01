@@ -37,6 +37,7 @@ class MyPageViewController: UIViewController {
     func addHistoryButtonAction() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTappedHistoryButton))
         myPageView.historyStack.addGestureRecognizer(tap)
+        
     }
     
     @objc func didTappedHistoryButton() {
@@ -66,14 +67,21 @@ class MyPageViewController: UIViewController {
         navigationController?.pushViewController(registeredKickboardViewController, animated: true)
     }
     
+    // 로그아웃 버튼
     func addLogoutButtonAction() {
         myPageView.logoutButton.addTarget(self, action: #selector(didTappedLogoutButton), for: .touchUpInside)
     }
     
-    // 새로 추가
     @objc func didTappedLogoutButton() {
         //let vc = LoginViewController()
         //navigationController?.pushViewController(vc, animated: true)
+        
+        // TODO: - pop을 이용한게 아닌, 로그인 뷰로 넘어가게 하기
         navigationController?.popViewController(animated: true)
+        
+        // 계정 정보 초기화
+        // TODO: - 함수로 만들기
+        LoginViewController.shared.loginUserID = ""
+        LoginViewController.shared.loginNickName = ""
     }
 }
