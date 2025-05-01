@@ -5,6 +5,7 @@
 //  Created by LCH on 4/30/25.
 //
 
+// Naver map api로부터 받은 jon 디코딩을 위한 struct 정의
 struct GeocodingResult: Decodable {
     let status: String
     let meta: Meta
