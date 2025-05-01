@@ -28,16 +28,24 @@ class MyPageViewController: UIViewController {
         addStatusButtonAction()
         addKickboardButtonAction()
         addLogoutButtonAction()
+        
+        // 마이페이지 닉네임을 로그인 계정의 닉네임으로 변경
+        myPageView.nameLabel.text = LoginViewController.shared.loginNickName
     }
     
     // 이용 내역
     func addHistoryButtonAction() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTappedHistoryButton))
         myPageView.historyStack.addGestureRecognizer(tap)
+        
     }
     
     @objc func didTappedHistoryButton() {
         let usageHistoryViewController = UsageHistoryViewController()
+        let testUserID = "testUser"
+        let usageList = CoreDataManager.shared.fetchUsageInfos(for: testUserID)
+        usageHistoryViewController.usageHistoryList = usageList
+ 
         navigationController?.pushViewController(usageHistoryViewController, animated: true)
     }
     
@@ -48,7 +56,14 @@ class MyPageViewController: UIViewController {
     }
     
     @objc func didTappedStatusButton() {
-        let usageStatusViewController = UsageStatusViewController(status: .using)
+        let inUseKickboards = CoreDataManager.shared.fetchInUseKickboards()
+        let status: Status = inUseKickboards.isEmpty ? .empty : .using
+        let usageStatusViewController = UsageStatusViewController(status: status)
+        
+        if let kickboard = inUseKickboards.first {
+               usageStatusViewController.kickboard = kickboard
+           }
+        
         navigationController?.pushViewController(usageStatusViewController, animated: true)
     }
     
@@ -60,17 +75,25 @@ class MyPageViewController: UIViewController {
     
     @objc func didTappedKickboardButton() {
         let registeredKickboardViewController = RegisteredKickboardViewController()
+        registeredKickboardViewController.kickboardList = CoreDataManager.shared.fetchKickboardData()
         navigationController?.pushViewController(registeredKickboardViewController, animated: true)
     }
     
+    // 로그아웃 버튼
     func addLogoutButtonAction() {
         myPageView.logoutButton.addTarget(self, action: #selector(didTappedLogoutButton), for: .touchUpInside)
     }
     
-    // 새로 추가
     @objc func didTappedLogoutButton() {
         //let vc = LoginViewController()
         //navigationController?.pushViewController(vc, animated: true)
+        
+        // TODO: - pop을 이용한게 아닌, 로그인 뷰로 넘어가게 하기
         navigationController?.popViewController(animated: true)
+        
+        // 계정 정보 초기화
+        // TODO: - 함수로 만들기
+        LoginViewController.shared.loginUserID = ""
+        LoginViewController.shared.loginNickName = ""
     }
 }

@@ -70,6 +70,18 @@ final class CoreDataManager {
             return nil
         }
     }
+    
+    /// 회원가입 시, 중복 아이디 검사
+    func fetchUserID(userID: String) -> AppUser? {
+        let request: NSFetchRequest<AppUser> = AppUser.fetchRequest()
+        request.predicate = NSPredicate(format: "userID == %@", userID)
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Login Fetch Failed: \(error)")
+            return nil
+        }
+    }
 
     /// 이용 내역 조회
     func fetchUsageInfos(for userID: String) -> [UserUsageInfo] {
