@@ -18,6 +18,14 @@ class UsageInvoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        usageInvoiceView.delegate = self
+
+    }
+}
+
+// MARK: - SafetyInstructionsViewDelegate
+extension UsageInvoiceViewController: UsageInvoiceViewDelegate {
+    func didTapConfirm() {
+        dismiss(animated: true, completion: nil)
     }
 }
