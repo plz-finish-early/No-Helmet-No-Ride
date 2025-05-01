@@ -84,44 +84,35 @@ class MainMapViewController: BaseMapViewController {
         
         // 모든 UI 컴포넌트 추가
         [customSegmentedControl, bottomSheetView, ridingKickboardView, usingKickboardButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
         
         // 레이아웃 제약 조건
-        NSLayoutConstraint.activate([
-            // 세그먼트 컨트롤
-            customSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            customSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            customSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            customSegmentedControl.heightAnchor.constraint(equalToConstant: 26),
-            
-            // 바텀 시트
-            bottomSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomSheetView.heightAnchor.constraint(equalToConstant: 260),
-            
-            // 킥보드 안내 뷰
-            ridingKickboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            
-            // 이용하기 버튼
-            usingKickboardButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            usingKickboardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            usingKickboardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        customSegmentedControl.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            $0.leading.equalToSuperview().offset(12)
+            $0.trailing.equalToSuperview().inset(12)
+            $0.height.equalTo(26)
+        }
         
-        // 동적 제약 조건 (우선순위 설정)
-        let dynamicConstraints = [
-            ridingKickboardView.bottomAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: -60),
-            ridingKickboardView.bottomAnchor.constraint(greaterThanOrEqualTo: usingKickboardButton.topAnchor, constant: -121)
-        ]
-        dynamicConstraints[0].priority = .defaultHigh  // 기본 우선순위
-        dynamicConstraints[1].priority = .required     // 필수 조건
-        NSLayoutConstraint.activate(dynamicConstraints)
+        bottomSheetView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(260)
+            // bottom 제약은 configureBottomSheet에서 설정
+        }
         
-        // 고정 크기 제약
-        ridingKickboardView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        ridingKickboardView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        usingKickboardButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
+        ridingKickboardView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(100)
+            $0.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
+            $0.bottom.equalTo(bottomSheetView.snp.top).offset(-60).priority(.high)
+            $0.bottom.greaterThanOrEqualTo(usingKickboardButton.snp.top).offset(-121).priority(.required)
+        }
     }
 }
 

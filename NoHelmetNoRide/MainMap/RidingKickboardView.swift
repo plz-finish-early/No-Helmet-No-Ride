@@ -33,19 +33,13 @@ class RidingKickboardView: UIView {
         ridingKickboardLabel.layer.cornerRadius = 25
         ridingKickboardLabel.clipsToBounds = true
         ridingKickboardLabel.textAlignment = .center
+        addSubview(ridingKickboardLabel)
     }
     
     private func setupConstraints() {
-        [
-            ridingKickboardLabel
-        ].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            addSubview($0)
+        ridingKickboardLabel.snp.makeConstraints {
+            $0.width.equalTo(104)
+            $0.height.equalTo(45)
         }
-        
-        NSLayoutConstraint.activate([
-            ridingKickboardLabel.widthAnchor.constraint(equalToConstant: 104),
-            ridingKickboardLabel.heightAnchor.constraint(equalToConstant: 45),
-        ])
     }
 }

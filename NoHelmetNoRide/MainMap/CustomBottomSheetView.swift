@@ -82,27 +82,34 @@ class CustomBottomSheetView: UIView {
             kickboardBatteryLabel
             
         ].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
         }
         
-        NSLayoutConstraint.activate([
-            kickboardRentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            kickboardRentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            kickboardRentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -36),
-            
-            kickboardIDLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
-            kickboardIDLabel.bottomAnchor.constraint(equalTo: kickboardRentButton.topAnchor, constant: -40),
-            
-            kickboardLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
-            kickboardLabel.bottomAnchor.constraint(equalTo: kickboardIDLabel.topAnchor, constant: -26),
-            
-            kickboardBatteryLabel.bottomAnchor.constraint(equalTo: kickboardRentButton.topAnchor, constant: -40),
-            kickboardBatteryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            
-            kickboardTimeLabel.bottomAnchor.constraint(equalTo: kickboardBatteryLabel.topAnchor, constant: -8),
-            kickboardTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-        ])
+        kickboardRentButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(12)
+            $0.trailing.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview().inset(36)
+        }
+        
+        kickboardIDLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(22)
+            $0.bottom.equalTo(kickboardRentButton.snp.top).offset(-40)
+        }
+        
+        kickboardLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(22)
+            $0.bottom.equalTo(kickboardIDLabel.snp.top).offset(-26)
+        }
+        
+        kickboardBatteryLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(30)
+            $0.bottom.equalTo(kickboardRentButton.snp.top).offset(-40)
+        }
+        
+        kickboardTimeLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(30)
+            $0.bottom.equalTo(kickboardBatteryLabel.snp.top).offset(-8)
+        }
     }
 }
 
