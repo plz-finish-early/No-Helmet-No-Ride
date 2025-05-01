@@ -79,7 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             registrationDate: Date(),
             totalUsageTime: 18.5,
             totalUsageDistance: 2600,
-            kickboardBatteryAmount: 87
+            kickboardBatteryAmount: 87,
+            lat: 37.5665,
+            lng: 126.9780
         )
         
         print("테스트 유저 & 킥보드 등록 완료")

@@ -9,6 +9,9 @@ import UIKit
 
 class CustomBottomSheetView: UIView {
     
+    private var timer: Timer?
+    private var startTime: Date?
+    
     weak var delegate: CustomBottomSheetViewDelegate?
     
     private var isRenting: Bool = false {
@@ -16,7 +19,7 @@ class CustomBottomSheetView: UIView {
             updateUIForRentalState()
         }
     }
-    
+   
     let kickboardIDLabel = UILabel()
     let kickboardRentButton = MainButton(title: "킥보드 이용하기")
     let kickboardLabel = UILabel()
@@ -41,14 +44,61 @@ class CustomBottomSheetView: UIView {
         delegate?.didRequestHide()
     }
     
+    private func startTimer() {
+        startTime = Date()
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateTimeLabel),
+            userInfo: nil,
+            repeats: true
+        )
+        timer?.tolerance = 0.1
+    }
+
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+        startTime = nil
+    }
+    
+    @objc private func updateTimeLabel() {
+        guard let startTime = startTime else { return }
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        let minutes = Int(elapsedTime) / 60
+        let seconds = Int(elapsedTime) % 60
+        kickboardTimeLabel.text = String(format: "사용 시간: %02d분 %02d초", minutes, seconds)
+    }
+
+    
     private func updateUIForRentalState() {
         kickboardTimeLabel.isHidden = !isRenting
         kickboardRentButton.setTitle(isRenting ? "킥보드 반납하기" : "킥보드 이용하기", for: .normal)
         delegate?.didChangeRentalState(isRenting: isRenting)
+        
+        if isRenting {
+                startTimer()
+            } else {
+                stopTimer()
+            }
     }
     
     @objc private func didTapRentButton() {
-        isRenting.toggle()
+        if isRenting == false {
+            isRenting.toggle()
+            showSafetyInstructions()
+        } else {
+            isRenting.toggle()
+            showUsageInvoiceView()
+        }
+    }
+    
+    @objc func showSafetyInstructions() {
+        delegate?.didRequestShowSafetyInstructions()
+    }
+    
+    @objc func showUsageInvoiceView() {
+        delegate?.didRequestShowUsageInvoiceView()
     }
     
     private func setupUI() {
@@ -69,7 +119,7 @@ class CustomBottomSheetView: UIView {
         kickboardBatteryLabel.font = .systemFont(ofSize: 14, weight: .thin)
         
         kickboardTimeLabel.isHidden = true
-        kickboardTimeLabel.text = "사용 시간: nn분"
+        kickboardTimeLabel.text = "사용 시간: 분"
         kickboardTimeLabel.font = .systemFont(ofSize: 14, weight: .thin)
     }
     
@@ -116,4 +166,6 @@ class CustomBottomSheetView: UIView {
 protocol CustomBottomSheetViewDelegate: AnyObject {
     func didRequestHide()
     func didChangeRentalState(isRenting: Bool)
+    func didRequestShowSafetyInstructions()
+    func didRequestShowUsageInvoiceView()
 }
