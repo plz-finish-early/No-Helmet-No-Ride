@@ -4,36 +4,65 @@
 //
 //  Created by JIN LEE on 4/28/25.
 //
-
 import UIKit
 import SnapKit
 
-class MainMapViewController: UIViewController {
+class MainMapViewController: BaseMapViewController {
+    
+    // MARK: - UI Components
     var customSegmentedControl = UISegmentedControl()
     let bottomSheetView = CustomBottomSheetView()
-    // 바텀시트(Bottom Sheet) 뷰의 위치를 제어하는 오토레이아웃(NSLayoutConstraint) 제약조건
-    var bottomSheetViewBottomConstraint: NSLayoutConstraint!
     let ridingKickboardView = RidingKickboardView()
     let usingKickboardButton = UsingKickboardButton(title: "킥보드 이용하기")
     
+    // MARK: - Layout Constraints
+    var bottomSheetViewBottomConstraint: NSLayoutConstraint!
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.delegate = self  // 지도 이벤트 델리게이트 설정
+        
         setupUI()
         setupConstraints()
-        
-        bottomSheetViewBottomConstraint = bottomSheetView.bottomAnchor.constraint(
-            equalTo: view.bottomAnchor,
-            constant: 260 // 초기에는 화면 밖에 위치
-        )
-        
-        bottomSheetView.delegate = self
-        bottomSheetViewBottomConstraint?.isActive = true
-        // 바텀시트를 뷰의 계층 가장 상단에 위치하게
-        view.bringSubviewToFront(bottomSheetView)
+        configureBottomSheet()
     }
     
+    // MARK: - UI Configuration
+    private func setupUI() {
+        view.backgroundColor = .clear
+        usingKickboardButton.addTarget(self, action: #selector(didTapUsingKickboardButton), for: .touchUpInside)
+    }
+    
+    private func configureBottomSheet() {
+        bottomSheetViewBottomConstraint = bottomSheetView.bottomAnchor.constraint(
+            equalTo: view.bottomAnchor,
+            constant: 260 // 초기 위치: 화면 밖
+        )
+        bottomSheetView.delegate = self
+        bottomSheetViewBottomConstraint?.isActive = true
+        view.bringSubviewToFront(bottomSheetView)  // 뷰 계층 최상단으로
+    }
+    //MARK: - Button Action
+    
+    @objc func didTapUsingKickboardButton() {
+        showKickboardUseAlert()
+    }
+
+    func showKickboardUseAlert() {
+        let alert = UIAlertController(
+            title: "킥보드를 선택해 주세요.",
+            message: "이용하실 킥보드를 먼저 선택 후\n킥보드 이용 버튼을 눌러주세요.",
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            print("확인")
+        }
+        alert.addAction(confirmAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Animation Methods
     private func showBottomSheet() {
         bottomSheetViewBottomConstraint?.constant = 0
         UIView.animate(withDuration: 0.3) {
@@ -43,63 +72,73 @@ class MainMapViewController: UIViewController {
     
     func hideBottomSheet() {
         guard bottomSheetViewBottomConstraint?.constant == 0 else { return }
-        
         bottomSheetViewBottomConstraint?.constant = 260
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
     
-    private func setupUI() {
-        view.backgroundColor = .white
-    }
-    
+    // MARK: - AutoLayout Setup
     private func setupConstraints() {
-        [
-            customSegmentedControl,
-            bottomSheetView,
-            ridingKickboardView,
-            usingKickboardButton
-        ].forEach {
-            view.addSubview($0)
+        super.setupMapView()  // 부모 클래스의 지도 뷰 설정 호출
+        
+        // 모든 UI 컴포넌트 추가
+        [customSegmentedControl, bottomSheetView, ridingKickboardView, usingKickboardButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
         }
-        // 높이 제약 추가
-        ridingKickboardView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-
-        // 상단 위치 제약 추가
-        ridingKickboardView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-
-        // 기존 제약
-        let c1 = ridingKickboardView.bottomAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: -54)
-        c1.priority = .defaultHigh
-
-        let c2 = ridingKickboardView.bottomAnchor.constraint(greaterThanOrEqualTo: usingKickboardButton.topAnchor, constant: -116)
-        c2.priority = .required
-
-        NSLayoutConstraint.activate([c1, c2])
-
+        
+        // 레이아웃 제약 조건
         NSLayoutConstraint.activate([
+            // 세그먼트 컨트롤
             customSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            customSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             customSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            customSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             customSegmentedControl.heightAnchor.constraint(equalToConstant: 26),
             
+            // 바텀 시트
             bottomSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomSheetView.heightAnchor.constraint(equalToConstant: 260),
             
+            // 킥보드 안내 뷰
             ridingKickboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             
-            usingKickboardButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            usingKickboardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            usingKickboardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            // 이용하기 버튼
+            usingKickboardButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            usingKickboardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            usingKickboardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        // 동적 제약 조건 (우선순위 설정)
+        let dynamicConstraints = [
+            ridingKickboardView.bottomAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: -60),
+            ridingKickboardView.bottomAnchor.constraint(greaterThanOrEqualTo: usingKickboardButton.topAnchor, constant: -121)
+        ]
+        dynamicConstraints[0].priority = .defaultHigh  // 기본 우선순위
+        dynamicConstraints[1].priority = .required     // 필수 조건
+        NSLayoutConstraint.activate(dynamicConstraints)
+        
+        // 고정 크기 제약
+        ridingKickboardView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        ridingKickboardView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
 }
 
+// MARK: - Bottom Sheet Delegate
 extension MainMapViewController: CustomBottomSheetViewDelegate {
     func didRequestHide() {
+        hideBottomSheet()
+    }
+}
+
+// MARK: - Map Interaction Delegate
+extension MainMapViewController: MapViewDelegate {
+    func didTapMarker(title: String, address: String) {
+        showBottomSheet()
+    }
+    
+    func didTapMap() {
         hideBottomSheet()
     }
 }
