@@ -16,6 +16,9 @@ class MainViewController: UIViewController {
     
     var currentViewController: UIViewController?
     
+    let networkService = NetworkService()
+    let searchBar = AddressSearchBar()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -25,9 +28,13 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        searchBar.delegate = self
         setupSegmentedControl()
         switchToView(index: 0) // 초기에는 지도 뷰
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.endEditing(false) //서치바 이외에 선택시 편집 종료
     }
     
     func setupSegmentedControl() {
@@ -85,12 +92,25 @@ class MainViewController: UIViewController {
         switch index {
         case 0:
             selectedVC = mainMapView
+            mainMapView.updateData()
         case 1:
             selectedVC = kickboard
         case 2:
             selectedVC = myPage
         default:
             return
+        }
+        
+        if selectedVC == mainMapView {
+            selectedVC.view.addSubview(searchBar)
+            
+            searchBar.snp.makeConstraints {
+                $0.height.greaterThanOrEqualTo(50)
+                $0.horizontalEdges.equalToSuperview().inset(12)
+                $0.top.equalToSuperview().offset(20)
+            }
+        } else {
+            searchBar.removeFromSuperview()
         }
         
         // 새로운 뷰 컨트롤러를 자식으로 추가
@@ -111,5 +131,31 @@ class MainViewController: UIViewController {
         
         // 현재 뷰 컨트롤러로 상태 업데이트
         currentViewController = selectedVC
+    }
+}
+
+
+extension MainViewController: AddressSearchBarDelegate {
+    func getCooredinates(address: String, coodinates: (Double, Double)) {
+        print("버튼 클릭됨")
+        Task {
+            do {
+                let result = try await networkService.serializedAddressToCoordinates(address: address)
+                guard let lat = Double(result.addresses[0].y) else {
+                    throw CustomMapError.failedConverStringToDouble
+                }
+                guard let lng = Double(result.addresses[0].x) else {
+                    throw CustomMapError.failedConverStringToDouble
+                }
+                print("네이버 api 주소로 좌표 가져오기 성공")
+                mainMapView.moveCameraToselectedAddress(lat: lat, lng: lng)
+            } catch {
+                print(error)
+                print("Mapkit에서 좌표 가져오기")
+                let lat = searchBar.selectedCoordinates.latitude
+                let lng = searchBar.selectedCoordinates.longitude
+                mainMapView.moveCameraToselectedAddress(lat: lat, lng: lng)
+            }
+        }
     }
 }

@@ -7,8 +7,13 @@
 import UIKit
 import SnapKit
 import MapKit
+protocol AddressSearchBarDelegate: AnyObject {
+    func getCooredinates(address: String, coodinates: (Double, Double))
+}
 
 class AddressSearchBar: UIView {
+    
+    weak var delegate: AddressSearchBarDelegate?
     
     private var timer: Timer? // 타이머 인스턴스 생성
     private var currentText: String = "" // searchBar와 텍스트 비교를 위한 변수
@@ -200,6 +205,7 @@ extension AddressSearchBar: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true) // 선택된 테이블 뷰 셀 미선택으로 변경
         searchBar.text = selectedAddress // searchBar의 텍스트를 선택한 셀의 주소로 변경
         searchBar.endEditing(false) // 셀 선택 후 serachBar 에디팅 모드 종료
+        delegate?.getCooredinates(address: selectedAddress, coodinates: (selectedCoordinates.latitude, selectedCoordinates.longitude))
     }
 }
 

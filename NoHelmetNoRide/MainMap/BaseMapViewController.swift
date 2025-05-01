@@ -13,7 +13,7 @@ import CoreLocation
 /// 지도 상호작용 이벤트를 전달하는 프로토콜
 protocol MapViewDelegate: AnyObject {
     /// 마커를 탭했을 때 호출
-    func didTapMarker(title: String, address: String)
+    func didTapMarker(title: String, kickboardID: String, battery: Int16)
     /// 지도 빈 곳을 탭했을 때 호출
     func didTapMap()
 }
@@ -21,6 +21,12 @@ protocol MapViewDelegate: AnyObject {
 /// 네이버 지도 및 위치, 마커 기능을 담당하는 베이스 뷰컨트롤러
 class BaseMapViewController: UIViewController {
     
+    var kickboardData: [KickboardData] = CoreDataManager.shared.fetchKickboardData() {
+        didSet{
+            updateMarker()
+        }
+    }
+
     // MARK: - Delegate
     weak var delegate: MapViewDelegate?
     
@@ -38,7 +44,7 @@ class BaseMapViewController: UIViewController {
         setupMapView()
         setupLocationManager()
     }
-    
+
     // MARK: - 지도 뷰 설정
     func setupMapView() {
         // 지도 뷰 추가 및 레이아웃
@@ -96,6 +102,55 @@ class BaseMapViewController: UIViewController {
             fatalError()
         }
     }
+    // 데이터 업데이트를 위한 메서드
+    func updateData() {
+        kickboardData = CoreDataManager.shared.fetchKickboardData()
+    }
+    
+    // 전달받은 좌표로 이동하는 메서드
+    func moveCameraToselectedAddress(lat: Double, lng: Double) {
+        let location = NMGLatLng(lat: lat, lng: lng)
+        let cameramove = NMFCameraUpdate(scrollTo: location)
+        DispatchQueue.main.async {
+            self.naverMapView.mapView.zoomLevel = 16
+            self.naverMapView.mapView.moveCamera(cameramove)
+        }
+    }
+    
+    // 킥보드 등록시 좌표값을 얻기위한 메서드
+    func getCenterofMap() -> (lat: Double, lng: Double) {
+        let location = naverMapView.mapView.cameraPosition.target
+        return (location.lat, location.lng)
+    }
+    
+    // CoreData 킥보드 정보로 부터 마커 업데이트 메서드
+    func updateMarker() {
+        for kickboard in kickboardData {
+            let location = NMGLatLng(lat: kickboard.lat, lng: kickboard.lng)
+            let newMarker = NMFMarker(position: location)
+            DispatchQueue.main.async {
+                newMarker.mapView = self.naverMapView.mapView
+            }
+            guard let kickboardID = kickboard.kickboardID else {
+                return
+            }
+            newMarker.userInfo = [
+                //나중에 데이터 연결하고 킥보드ID 등 들어가야 하는 데이터로 변환하면 됨!!
+                "title": "킥보드 위치",
+                "kickboardID": kickboardID,
+                "battery" : kickboard.kickboardBatteryAmount
+            ]
+            
+            // 마커 터치 핸들러 설정
+            newMarker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
+                guard let marker = overlay as? NMFMarker,
+                      let title = marker.userInfo["title"] as? String,
+                      let kickboardID = marker.userInfo["kickboardID"] as? String else { return true }
+                self?.delegate?.didTapMarker(title: title, kickboardID: kickboardID, battery: kickboard.kickboardBatteryAmount)
+                return true
+            }
+        }
+    }
 }
 
 // MARK: - 지도 터치 이벤트 처리
@@ -104,7 +159,7 @@ extension BaseMapViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         delegate?.didTapMap()
         print("지도 탭: \(latlng.lat), \(latlng.lng)")
-        
+
         // 마커 추가 예시 (원한다면)
         lat = latlng.lat
         lng = latlng.lng
@@ -128,6 +183,7 @@ extension BaseMapViewController: NMFMapViewTouchDelegate {
             self?.delegate?.didTapMarker(title: title, address: address)
             return true
         }
+        */
     }
 }
 
