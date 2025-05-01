@@ -42,7 +42,7 @@ final class CoreDataManager {
     }
 
     /// 킥보드 등록
-    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16) {
+    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16, lat: Double, lng: Double) {
         if isKickboardRegistered(kickboardID: kickboardID) {
             print("이미 등록된 킥보드입니다.")
             return
@@ -54,6 +54,8 @@ final class CoreDataManager {
         kickboard.totalUsageTime = totalUsageTime
         kickboard.totalUsageDistance = totalUsageDistance
         kickboard.kickboardBatteryAmount = kickboardBatteryAmount
+        kickboard.lat = lat
+        kickboard.lng = lng
         saveContext()
     }
 
