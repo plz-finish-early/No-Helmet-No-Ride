@@ -22,7 +22,7 @@ class KickboardRegistrationWithMap: BaseMapViewController {
     
     let centerPin: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "pin")
+        imageView.image = UIImage(resource: .pin)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .black
         return imageView
@@ -54,8 +54,8 @@ class KickboardRegistrationWithMap: BaseMapViewController {
         }
         
         centerPin.snp.makeConstraints {
-            let height = 30
-            $0.width.equalTo(30)
+            let height = 44
+            $0.width.equalTo(34)
             $0.height.equalTo(height)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().offset(0 - height/2)
