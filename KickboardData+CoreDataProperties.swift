@@ -22,6 +22,8 @@ extension KickboardData {
     @NSManaged public var totalUsageTime: Double
     @NSManaged public var totalUsageDistance: Int32
     @NSManaged public var kickboardBatteryAmount: Int16
+    @NSManaged public var lat: Double
+    @NSManaged public var lng: Double
 
 }
 
