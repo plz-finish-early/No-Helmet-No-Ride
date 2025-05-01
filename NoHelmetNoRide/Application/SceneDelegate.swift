@@ -22,10 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window.makeKeyAndVisible()
         
-        // 스플래시 화면을 1초 유지
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-            animateFadeOutAndSwitchToMain()
-        }
+        //window.rootViewController = ViewController()
         
         // 스플래시 화면 애니매이션 효과 설정
         func animateFadeOutAndSwitchToMain() {
