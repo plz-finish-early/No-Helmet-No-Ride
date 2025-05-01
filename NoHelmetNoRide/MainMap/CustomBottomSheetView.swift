@@ -9,8 +9,11 @@ import UIKit
 
 class CustomBottomSheetView: UIView {
     
-    private var timer: Timer?
     private var startTime: Date?
+    private var timer: Timer?
+    private var distance: Double = 0
+    private var battery: Int = 100 // 예시: 100%에서 시작
+    private let kickboardSpeed: Double = 3 // m/s (10km/h)
     
     weak var delegate: CustomBottomSheetViewDelegate?
     
@@ -19,7 +22,7 @@ class CustomBottomSheetView: UIView {
             updateUIForRentalState()
         }
     }
-   
+    
     let kickboardIDLabel = UILabel()
     let kickboardRentButton = MainButton(title: "킥보드 이용하기")
     let kickboardLabel = UILabel()
@@ -44,32 +47,47 @@ class CustomBottomSheetView: UIView {
         delegate?.didRequestHide()
     }
     
-    private func startTimer() {
-        startTime = Date()
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateTimeLabel),
-            userInfo: nil,
-            repeats: true
-        )
-        timer?.tolerance = 0.1
-    }
+    func startTimer() {
+            startTime = Date()
+            distance = 0
+            battery = 100
+            timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                         target: self,
+                                         selector: #selector(updateInfo),
+                                         userInfo: nil,
+                                         repeats: true)
+        }
 
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-        startTime = nil
-    }
-    
-    @objc private func updateTimeLabel() {
-        guard let startTime = startTime else { return }
-        let elapsedTime = Date().timeIntervalSince(startTime)
-        let minutes = Int(elapsedTime) / 60
-        let seconds = Int(elapsedTime) % 60
-        kickboardTimeLabel.text = String(format: "사용 시간: %02d분 %02d초", minutes, seconds)
-    }
+        // 타이머 중지
+        func stopTimer() {
+            timer?.invalidate()
+            timer = nil
+        }
 
+        @objc private func updateInfo() {
+            guard let startTime = startTime else { return }
+            let elapsedTime = Date().timeIntervalSince(startTime)
+            let minutes = Int(elapsedTime) / 60
+            let seconds = Int(elapsedTime) % 60
+
+            // 거리 계산 (10km/h = 3/s)
+            distance = elapsedTime * kickboardSpeed
+            //kickboardDistanceLabel.text = String(format: "이동 거리: %.1f m", distance)
+
+            // 배터리 잔량 예시 (10초에 1% 감소, 0% 이하로 떨어지지 않게)
+            battery = max(0, 100 - Int(elapsedTime/10))
+            kickboardBatteryLabel.text = "배터리 잔량: \(battery)%"
+
+            // 시간 표시
+            kickboardTimeLabel.text = String(format: "사용 시간: %02d분 %02d초", minutes, seconds)
+
+            // 오늘 날짜 표시
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "yyyy년 MM월 dd일"
+            let todayString = formatter.string(from: Date())
+            //kickboardDateLabel.text = "오늘 날짜: \(todayString)"
+        }
     
     private func updateUIForRentalState() {
         kickboardTimeLabel.isHidden = !isRenting
@@ -77,10 +95,10 @@ class CustomBottomSheetView: UIView {
         delegate?.didChangeRentalState(isRenting: isRenting)
         
         if isRenting {
-                startTimer()
-            } else {
-                stopTimer()
-            }
+            startTimer()
+        } else {
+            stopTimer()
+        }
     }
     
     @objc private func didTapRentButton() {
@@ -115,11 +133,11 @@ class CustomBottomSheetView: UIView {
         kickboardLabel.text = "전동킥보드"
         kickboardLabel.font = .systemFont(ofSize: 14, weight: .thin)
         
-        kickboardBatteryLabel.text = "배터리 잔량: nn%"
+        kickboardBatteryLabel.text = "배터리 잔량: \(battery)%"
         kickboardBatteryLabel.font = .systemFont(ofSize: 14, weight: .thin)
         
         kickboardTimeLabel.isHidden = true
-        kickboardTimeLabel.text = "사용 시간: 분"
+        //kickboardTimeLabel.text = "사용 시간: 분"
         kickboardTimeLabel.font = .systemFont(ofSize: 14, weight: .thin)
     }
     
