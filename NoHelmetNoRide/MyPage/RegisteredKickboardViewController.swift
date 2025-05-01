@@ -56,6 +56,9 @@ extension RegisteredKickboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RegisteredKickboardCell else { return UITableViewCell() }
         
+        //cell 선택시 선택효과 제거
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
         return cell
     }
     

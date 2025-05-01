@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class UseageInvoiceViewController: UIViewController {
+class UsageInvoiceViewController: UIViewController {
     
     let usageInvoiceView = UsageInvoiceView()
     
