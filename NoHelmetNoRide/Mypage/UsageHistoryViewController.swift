@@ -26,8 +26,17 @@ class UsageHistoryViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
 
-        // 등록한 유저아이디 데이터로 이용내역 나타냄
         let currentUserID = LoginViewController.shared.loginUserID
+
+        // 더미 데이터 삭제
+        let allUsageList = CoreDataManager.shared.fetchUsageInfos(for: currentUserID)
+        for info in allUsageList {
+            if info.kickboardID == "K001" || info.kickboardID == "test1234" || info.kickboardID == "킥보드 ID" {
+                CoreDataManager.shared.deleteUsageInfo(info: info)
+            }
+        }
+
+        // 삭제 후 리스트 새로 불러오기
         usageHistoryList = CoreDataManager.shared.fetchUsageInfos(for: currentUserID)
         usageHistoryView.tableView.reloadData()
     }
