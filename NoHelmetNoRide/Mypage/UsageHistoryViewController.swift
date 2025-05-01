@@ -51,6 +51,11 @@ extension UsageHistoryViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UsageHistoryCell", for: indexPath) as? UsageHistoryCell else {
             return UITableViewCell()
         }
+        
+        //cell 선택시 선택효과 제거
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+
+
         return cell
     }
 }
