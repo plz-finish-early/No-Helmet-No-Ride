@@ -85,6 +85,7 @@ class MainViewController: UIViewController {
         switch index {
         case 0:
             selectedVC = mainMapView
+            mainMapView.updateData()
         case 1:
             selectedVC = kickboard
         case 2:
