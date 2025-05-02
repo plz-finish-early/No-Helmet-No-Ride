@@ -33,9 +33,13 @@ class AddressSearchBar: UIView {
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.searchBarStyle = .minimal // searchBar 스타일 설정
+        searchBar.searchBarStyle = .default // searchBar 스타일 설정
         searchBar.placeholder = "주소 검색" // searchBar 비어있을때 placholder 설정
-        searchBar.searchTextField.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        searchBar.searchTextField.backgroundColor = UIColor.white
+        // searchBar background 회색 없애기
+        if let textfieldBackgroundView = searchBar.searchTextField.subviews.first {
+            textfieldBackgroundView.isHidden = true
+        }
         return searchBar
     }()
     

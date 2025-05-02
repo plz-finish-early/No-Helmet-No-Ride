@@ -17,7 +17,7 @@ class AddressSearchBarTableViewCell: UITableViewCell {
     private let addressLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .black
         return label
     }()
     
@@ -34,7 +34,7 @@ class AddressSearchBarTableViewCell: UITableViewCell {
     private func configureUI() {
         self.backgroundColor = .clear // 테이블 뷰 백그라운드 투명으로 설정
         
-        contentView.backgroundColor = .black.withAlphaComponent(0.2) // 컨텐츠 뷰 색상 검정 투명도 20% 설정
+        contentView.backgroundColor = .white.withAlphaComponent(0.8) // 컨텐츠 뷰 색상 검정 투명도 20% 설정
         
         contentView.addSubview(addressLabel) // 컨텐츠 뷰에 주소 라벨 추가
         

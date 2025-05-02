@@ -19,7 +19,7 @@ class SafetyInstructions: UIView {
     
     private let safetyRuleText: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .sub3
+        textView.backgroundColor = .bg
         return textView
     }()
 
@@ -42,7 +42,7 @@ class SafetyInstructions: UIView {
     
     
     private func configureUI() {
-        self.backgroundColor = .sub3
+        self.backgroundColor = .bg
         [
             imageView,
             safetyRuleText,

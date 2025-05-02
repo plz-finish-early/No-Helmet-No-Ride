@@ -14,7 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // 백 버튼 타이틀 제거
+            UIBarButtonItem.appearance().setTitleTextAttributes(
+                [.foregroundColor: UIColor.clear],
+                for: .normal
+            )
+            UIBarButtonItem.appearance().setTitleTextAttributes(
+                [.foregroundColor: UIColor.clear],
+                for: .highlighted
+            )
+        
         return true
     }
     
