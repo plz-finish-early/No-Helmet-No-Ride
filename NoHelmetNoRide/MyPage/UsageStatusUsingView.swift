@@ -51,7 +51,7 @@ class UsageStatusUsingView: UIView {
         return label
     }()
 
-    private let timeDistanceTitleLabel: UILabel = {
+    let timeDistanceTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "운행 시간 및 거리"
         label.font = .systemFont(ofSize: 18, weight: .bold)
@@ -59,7 +59,7 @@ class UsageStatusUsingView: UIView {
         return label
     }()
 
-    private let timeDistanceValueLabel: UILabel = {
+    let timeDistanceValueLabel: UILabel = {
         let label = UILabel()
         label.text = "000 분\n00 KM"
         label.numberOfLines = 2
@@ -69,7 +69,7 @@ class UsageStatusUsingView: UIView {
         return label
     }()
 
-    private let feeTitleLabel: UILabel = {
+    let feeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "이용 요금"
         label.font = .systemFont(ofSize: 18, weight: .bold)
@@ -77,7 +77,7 @@ class UsageStatusUsingView: UIView {
         return label
     }()
 
-    private let feeValueLabel: UILabel = {
+    let feeValueLabel: UILabel = {
         let label = UILabel()
         label.text = "KRW 00000 원"
         label.font = .systemFont(ofSize: 16, weight: .regular)
