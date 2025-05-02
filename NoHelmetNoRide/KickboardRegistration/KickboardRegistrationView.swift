@@ -30,6 +30,7 @@ class KickboardRegistrationView: UIView {
         textField.placeholder = "킥보드 아이디"
         textField.clearButtonMode = .always
         textField.textColor = .font
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -46,6 +47,7 @@ class KickboardRegistrationView: UIView {
     let idValidatorLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
+        label.text = "MK + 숫자4자리를 입력해주세요"
         label.textColor = .font
         return label
     }()
