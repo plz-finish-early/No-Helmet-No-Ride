@@ -33,6 +33,7 @@ class BaseMapViewController: UIViewController {
     // MARK: - 위치 및 지도 관련 프로퍼티
     let locationManager = CLLocationManager()
     lazy var naverMapView = NMFNaverMapView(frame: .zero) // 지도 뷰
+    var markers = [NMFMarker]()
     
     // 현재 좌표 저장용
     var lat: Double = 0.0
@@ -125,31 +126,45 @@ class BaseMapViewController: UIViewController {
     
     // CoreData 킥보드 정보로 부터 마커 업데이트 메서드
     func updateMarker() {
-        for kickboard in kickboardData {
-            let location = NMGLatLng(lat: kickboard.lat, lng: kickboard.lng)
-            let newMarker = NMFMarker(position: location)
-            DispatchQueue.main.async {
-                newMarker.mapView = self.naverMapView.mapView
+        if let usingKickboard = CoreDataManager.shared.fetchInUseKickboards(for: LoginViewController.shared.loginUserID) {
+            for marker in markers {
+                marker.mapView = nil
             }
-            guard let kickboardID = kickboard.kickboardID else {
-                return
-            }
-            newMarker.userInfo = [
-                //나중에 데이터 연결하고 킥보드ID 등 들어가야 하는 데이터로 변환하면 됨!!
-                "title": "킥보드 위치",
-                "kickboardID": kickboardID,
-                "battery" : kickboard.kickboardBatteryAmount
-            ]
+            markers.removeAll()
             
-            // 마커 터치 핸들러 설정
-            newMarker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
-                guard let marker = overlay as? NMFMarker,
-                      let title = marker.userInfo["title"] as? String,
-                      let kickboardID = marker.userInfo["kickboardID"] as? String else { return true }
-                self?.delegate?.didTapMarker(title: title, kickboardID: kickboardID, battery: kickboard.kickboardBatteryAmount)
-                return true
+            makeMarker(kickboard: usingKickboard)
+        } else {
+            for kickboard in kickboardData {
+                makeMarker(kickboard: kickboard)
             }
         }
+    }
+    
+    func makeMarker(kickboard: KickboardData) {
+        let location = NMGLatLng(lat: kickboard.lat, lng: kickboard.lng)
+        let newMarker = NMFMarker(position: location)
+        DispatchQueue.main.async {
+            newMarker.mapView = self.naverMapView.mapView
+        }
+        guard let kickboardID = kickboard.kickboardID else {
+            return
+        }
+        newMarker.userInfo = [
+            //나중에 데이터 연결하고 킥보드ID 등 들어가야 하는 데이터로 변환하면 됨!!
+            "title": "킥보드 위치",
+            "kickboardID": kickboardID,
+            "battery" : kickboard.kickboardBatteryAmount
+        ]
+        
+        // 마커 터치 핸들러 설정
+        newMarker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
+            guard let marker = overlay as? NMFMarker,
+                  let title = marker.userInfo["title"] as? String,
+                  let kickboardID = marker.userInfo["kickboardID"] as? String else { return true }
+            self?.delegate?.didTapMarker(title: title, kickboardID: kickboardID, battery: kickboard.kickboardBatteryAmount)
+            return true
+        }
+        markers.append(newMarker)
     }
 }
 

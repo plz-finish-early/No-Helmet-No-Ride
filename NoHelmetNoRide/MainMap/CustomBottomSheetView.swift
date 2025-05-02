@@ -125,7 +125,7 @@ class CustomBottomSheetView: UIView {
             }) {
                 CoreDataManager.shared.setKickboardInUse(kickboard: kickboard)
             }
-
+            delegate?.updateMarkerForUsingKickboard()
         } else {
             // 반납
             isRenting.toggle()
@@ -161,7 +161,7 @@ class CustomBottomSheetView: UIView {
             if let user = CoreDataManager.shared.fetchUserID(userID: userID) {
                 CoreDataManager.shared.unassignKickboardFromUser(user: user)
             }
-
+            delegate?.updateMarkerForUsingKickboard()
             let usageList = CoreDataManager.shared.fetchUsageInfos(for: userID)
             guard let latestUsage = usageList.last else { return }
             print(latestUsage)
@@ -256,4 +256,5 @@ protocol CustomBottomSheetViewDelegate: AnyObject {
     func didRequestShowSafetyInstructions()
     func didRequestShowUsageInvoiceView()
     func presentInvoiceViewController(_ vc: UsageInvoiceViewController)
+    func updateMarkerForUsingKickboard()
 }

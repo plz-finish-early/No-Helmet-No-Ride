@@ -39,6 +39,12 @@ class KickboardRegistrationWithMap: BaseMapViewController {
         configureUI()
     }
     
+    override func updateMarker() {
+        for kickboard in kickboardData {
+            makeMarker(kickboard: kickboard)
+        }
+    }
+    
     private func configureUI() {
         view.backgroundColor = .white
         [
