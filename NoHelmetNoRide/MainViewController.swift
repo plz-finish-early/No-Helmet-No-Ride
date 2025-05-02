@@ -95,6 +95,7 @@ class MainViewController: UIViewController {
             mainMapView.updateData()
         case 1:
             selectedVC = kickboard
+            kickboard.updateData()
         case 2:
             selectedVC = myPage
         default:

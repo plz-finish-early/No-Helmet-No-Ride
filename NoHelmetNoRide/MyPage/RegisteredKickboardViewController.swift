@@ -12,7 +12,11 @@ import SnapKit
 class RegisteredKickboardViewController: UIViewController {
     let registeredKickboardView = RegisteredKickboardView()
     
-    var kickboardList: [KickboardData] = []
+    var kickboardList: [KickboardData] = [] {
+        didSet {
+            registeredKickboardView.tableView.reloadData()
+        }
+    }
     
     override func loadView() {
         self.view = registeredKickboardView
@@ -22,9 +26,9 @@ class RegisteredKickboardViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
 
-        let currentUserID = LoginViewController.shared.loginUserID
-        kickboardList = CoreDataManager.shared.fetchKickboardData(for: currentUserID)
-        registeredKickboardView.tableView.reloadData()
+//        let currentUserID = LoginViewController.shared.loginUserID
+//        kickboardList = CoreDataManager.shared.fetchKickboardData(for: currentUserID) 유저가 등록한 킥보드으로 표시 X
+        kickboardList = CoreDataManager.shared.fetchKickboardData()
     }
     
     override func viewDidLoad() {
@@ -75,9 +79,13 @@ extension RegisteredKickboardViewController: UITableViewDataSource {
          cell.kickBoardIdDataLabel.text = kickboard.kickboardID ?? "미입력"
          cell.registeredDateDataLabel.text = formatDate(kickboard.registrationDate)
 
-         let usageMinutes = Int(kickboard.totalUsageTime)
-         let usageKm = Double(kickboard.totalUsageDistance) / 1000.0
-         cell.totalDriveDataLabel.text = String(format: "%d분 %.1fKm", usageMinutes, usageKm)
+        let time = Int(kickboard.totalUsageTime)
+        print(time)
+        let minutes = time / 60
+        let seconds = time % 60
+        let usageKm = Double(kickboard.totalUsageDistance) / 1000.0
+        print(minutes, seconds)
+        cell.totalDriveDataLabel.text = String(format: "%02d분 %02d초, %.1fKM", minutes, seconds, usageKm)
         
         //cell 선택시 선택효과 제거
         cell.selectionStyle = UITableViewCell.SelectionStyle.none

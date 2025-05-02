@@ -17,7 +17,7 @@ extension KickboardData {
     }
 
     @NSManaged public var isRidingKickboard: Bool
-    @NSManaged public var kickboardBatteryAmount: Int16
+    @NSManaged public var kickboardBatteryAmount: Double
     @NSManaged public var kickboardID: String?
     @NSManaged public var lat: Double
     @NSManaged public var lng: Double
