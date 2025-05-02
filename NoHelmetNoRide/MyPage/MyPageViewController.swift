@@ -31,6 +31,9 @@ class MyPageViewController: UIViewController {
         
         // 마이페이지 닉네임을 로그인 계정의 닉네임으로 변경
         myPageView.nameLabel.text = LoginViewController.shared.loginNickName
+        
+        // 네비게이션 뒤로 버튼 커스터마이징 코드
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
     // 이용 내역

@@ -183,7 +183,7 @@ class CustomBottomSheetView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = .systemGray5
+        backgroundColor = .systemGray6
         layer.cornerRadius = 16
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.masksToBounds = true
