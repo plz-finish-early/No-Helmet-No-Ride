@@ -39,6 +39,12 @@ class KickboardRegistrationWithMap: BaseMapViewController {
         configureUI()
     }
     
+    override func updateMarker() {
+        for kickboard in kickboardData {
+            makeMarker(kickboard: kickboard)
+        }
+    }
+    
     private func configureUI() {
         view.backgroundColor = .white
         [
@@ -58,7 +64,7 @@ class KickboardRegistrationWithMap: BaseMapViewController {
             $0.width.equalTo(34)
             $0.height.equalTo(height)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(0 - height/2)
+            $0.centerY.equalToSuperview().offset(0 - height / 2 - 50)
         }
 
         registerButton.snp.makeConstraints {

@@ -134,10 +134,13 @@ extension MainMapViewController: CustomBottomSheetViewDelegate {
     }
     
     func presentInvoiceViewController(_ vc: UsageInvoiceViewController) {
-          vc.modalPresentationStyle = .overFullScreen
-          present(vc, animated: true)
-      }
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
+    }
     
+    func updateMarkerForUsingKickboard() {
+        updateMarker()
+    }
 }
 
 // MARK: - Map Interaction Delegate
