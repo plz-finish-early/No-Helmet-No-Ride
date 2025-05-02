@@ -20,8 +20,11 @@ class RegisteredKickboardViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.navigationController?.isNavigationBarHidden = false
+
+        let currentUserID = LoginViewController.shared.loginUserID
+        kickboardList = CoreDataManager.shared.fetchKickboardData(for: currentUserID)
+        registeredKickboardView.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -78,6 +81,8 @@ extension RegisteredKickboardViewController: UITableViewDataSource {
         
         //cell 선택시 선택효과 제거
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        // 실제 값 전달
+        cell.configure(with: kickboard)
         
         return cell
     }

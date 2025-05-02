@@ -221,6 +221,24 @@ class UsageInvoiceView: UIView {
         print("confirmButtonTapped")
         delegate?.didTapConfirm()
     }
+    
+    // 저장된 데이터로 나타내주는 함수
+    func configure(with info: UserUsageInfo) {
+        kickboardIdLabel.text = info.kickboardID ?? "알 수 없음"
+
+        if let date = info.usageDate {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy년 MM월 dd일"
+            useDateDataLabel.text = formatter.string(from: date)
+        } else {
+            useDateDataLabel.text = "날짜 없음"
+        }
+
+        drivingTimeData.text = "\(Int(info.usageTime))분"
+        let km = Double(info.usageDistance) / 1000.0
+        drivingDistanceDataLabel.text = String(format: "%.1fKM", km)
+        chargeDataLabel.text = "KRW \(info.usageAmount) 원"
+    }
 }
 
 protocol UsageInvoiceViewDelegate: AnyObject {
