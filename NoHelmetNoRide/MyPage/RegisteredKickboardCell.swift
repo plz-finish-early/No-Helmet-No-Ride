@@ -147,7 +147,7 @@ class RegisteredKickboardCell: UITableViewCell {
     // 저장된 데이터로 나타내주는 함수
     func configure(with kickboard: KickboardData) {
         kickBoardIdDataLabel.text = kickboard.kickboardID ?? "알 수 없음"
-
+        
         if let date = kickboard.registrationDate {
             let formatter = DateFormatter()
             formatter.dateFormat = "yy.MM.dd"
@@ -155,9 +155,11 @@ class RegisteredKickboardCell: UITableViewCell {
         } else {
             registeredDateDataLabel.text = "날짜 없음"
         }
-
-        let usageMinutes = Int(kickboard.totalUsageTime)
+        
+        let totalSeconds = Int(kickboard.totalUsageTime)
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
         let usageKm = Double(kickboard.totalUsageDistance) / 1000.0
-        totalDriveDataLabel.text = "\(usageMinutes)분 \(String(format: "%.1f", usageKm))Km"
+        totalDriveDataLabel.text = String(format: "%02d분 %02d초, %.1fKm", minutes, seconds, usageKm)
     }
 }

@@ -44,6 +44,8 @@ class MainMapViewController: BaseMapViewController {
         bottomSheetView.delegate = self
         bottomSheetViewBottomConstraint?.isActive = true
         view.bringSubviewToFront(bottomSheetView)  // 뷰 계층 최상단으로
+        
+        bottomSheetView.delegate = self
     }
     //MARK: - Button Action
     

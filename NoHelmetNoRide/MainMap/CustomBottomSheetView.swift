@@ -92,6 +92,17 @@ class CustomBottomSheetView: UIView {
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "yyyy년 MM월 dd일"
         let todayString = formatter.string(from: Date())
+    
+        
+        NotificationCenter.default.post(
+            name: NSNotification.Name("UsageInfoUpdated"),
+            object: nil,
+            userInfo: [
+                "elapsedTime": elapsedTime,
+                "distance": usageDistance,
+                "amount": usageAmount
+            ]
+        )
     }
     
     
@@ -154,7 +165,11 @@ class CustomBottomSheetView: UIView {
                     addedDistance: usageDistance
                 )
                 
-                CoreDataManager.shared.updateKickboardBattery(kickboard: kickboard, newBattery: batteryAmount)
+                CoreDataManager.shared.updateKickboardBattery(
+                    kickboard: kickboard,
+                    newBattery: batteryAmount.rounded()
+                )
+                
             }
 
             // 유저에서 킥보드 연결 해제

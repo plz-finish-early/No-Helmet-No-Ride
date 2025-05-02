@@ -43,12 +43,20 @@ class UsageStatusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = false
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateUsageInfo(_:)),
+            name: NSNotification.Name("UsageInfoUpdated"),
+            object: nil
+        )
     }
     
     
@@ -61,4 +69,28 @@ class UsageStatusViewController: UIViewController {
     func didTappedConfirmButton() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func updateUsageInfo(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let elapsedTime = userInfo["elapsedTime"] as? TimeInterval,
+              let distance = userInfo["distance"] as? Int32,
+              let amount = userInfo["amount"] as? Int32,
+              let usingView = self.view as? UsageStatusUsingView else {
+            return
+        }
+
+        let minutes = Int(elapsedTime) / 60
+        let seconds = Int(elapsedTime) % 60
+        let distanceKM = Double(distance) / 1000.0
+
+        usingView.timeDistanceValueLabel.text = "\(minutes) 분 \(String(format: "%02d", seconds)) 초\n\(String(format: "%.2f", distanceKM)) KM"
+        usingView.feeValueLabel.text = "KRW \(amount) 원"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("UsageInfoUpdated"), object: nil)
+    }
+    
 }
+
