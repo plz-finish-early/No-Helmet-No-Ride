@@ -13,7 +13,7 @@ import CoreLocation
 /// 지도 상호작용 이벤트를 전달하는 프로토콜
 protocol MapViewDelegate: AnyObject {
     /// 마커를 탭했을 때 호출
-    func didTapMarker(title: String, kickboardID: String, battery: Int16)
+    func didTapMarker(title: String, kickboardID: String, battery: Double)
     /// 지도 빈 곳을 탭했을 때 호출
     func didTapMap()
 }

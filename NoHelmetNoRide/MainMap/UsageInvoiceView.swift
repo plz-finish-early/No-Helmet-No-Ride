@@ -104,7 +104,7 @@ class UsageInvoiceView: UIView {
         }
         
         // useDateDataLabel 설정
-        self.useDateDataLabel.text = "2025년 10월 29일" // 년, 월, 일 데이터
+        self.useDateDataLabel.text = "" // 년, 월, 일 데이터
         self.useDateDataLabel.textColor = .black
         self.useDateDataLabel.font = .systemFont(ofSize: 16)
         self.useDateDataLabel.textAlignment = .left
@@ -134,7 +134,7 @@ class UsageInvoiceView: UIView {
         }
         
         // drivingTimeData 설정
-        self.drivingTimeData.text = "38분" // 분 데이터
+        self.drivingTimeData.text = "" // 분 데이터
         self.drivingTimeData.textColor = .black
         self.drivingTimeData.font = .systemFont(ofSize: 16)
         self.drivingTimeData.textAlignment = .left
@@ -149,7 +149,7 @@ class UsageInvoiceView: UIView {
         }
         
         // drivingDistanceDataLabel 설정
-        self.drivingDistanceDataLabel.text = "3.8KM" // KM 데이터 / 더블 타입?
+        self.drivingDistanceDataLabel.text = "" // KM 데이터 / 더블 타입?
         self.drivingDistanceDataLabel.textColor = .black
         self.drivingDistanceDataLabel.font = .systemFont(ofSize: 16)
         self.drivingDistanceDataLabel.textAlignment = .left
@@ -179,7 +179,7 @@ class UsageInvoiceView: UIView {
         }
         
         // chargeDataLabel 설정
-        self.chargeDataLabel.text = "KRW 38000 원" // 가격 데이터
+        self.chargeDataLabel.text = "" // 가격 데이터
         self.chargeDataLabel.textColor = .black
         self.chargeDataLabel.font = .systemFont(ofSize: 16)
         self.chargeDataLabel.textAlignment = .left
@@ -222,6 +222,28 @@ class UsageInvoiceView: UIView {
         delegate?.didTapConfirm()
     }
     
+    func updateUI(usageInfo: UserUsageInfo) {
+        kickboardIdLabel.text = usageInfo.kickboardID ?? "알 수 없음"
+        
+        if let date = usageInfo.usageDate {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy년 MM월 dd일"
+            useDateDataLabel.text = formatter.string(from: date)
+        } else {
+            useDateDataLabel.text = "날짜 없음"
+        }
+        let time = usageInfo.usageTime
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        drivingTimeData.text = String(format: "%02d분 %02d초", minutes, seconds)
+        
+        let distance = Double(usageInfo.usageDistance)
+        print(distance)
+        drivingDistanceDataLabel.text = String(format: "%.1fM", distance)
+        chargeDataLabel.text = "KRW \(usageInfo.usageAmount) 원"
+        
+    }
+    /*
     // 저장된 데이터로 나타내주는 함수
     func configure(with info: UserUsageInfo) {
         kickboardIdLabel.text = info.kickboardID ?? "알 수 없음"
@@ -239,6 +261,7 @@ class UsageInvoiceView: UIView {
         drivingDistanceDataLabel.text = String(format: "%.1fKM", km)
         chargeDataLabel.text = "KRW \(info.usageAmount) 원"
     }
+     */
 }
 
 protocol UsageInvoiceViewDelegate: AnyObject {

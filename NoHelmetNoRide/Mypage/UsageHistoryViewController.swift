@@ -81,11 +81,14 @@ extension UsageHistoryViewController: UITableViewDataSource {
             cell.kickboardIdLabel.text = "킥보드 ID: \(info.kickboardID ?? "알 수 없음")"
             cell.dateLabel.text = "날짜: \(formatDate(info.usageDate))"
             
-            let minutes = Int(info.usageTime)
-            let distance = Double(info.usageDistance) / 1000.0
-            cell.drivingInfoLabel.text = String(format: "운행: %d분, %.1fKM", minutes, distance)
-            
-            cell.priceLabel.text = "요금: \(info.usageAmount)원"
+        let time = Int(info.usageTime)
+        
+        let minutes = time / 60
+        let seconds = time % 60
+        let distance = Double(info.usageDistance) / 1000.0
+        cell.drivingInfoLabel.text = String(format: "운행: %02d분 %02d초, %.1fKM", minutes, seconds, distance)
+        
+        cell.priceLabel.text = "요금: \(info.usageAmount)원"
         
         //cell 선택시 선택효과 제거
         cell.selectionStyle = UITableViewCell.SelectionStyle.none

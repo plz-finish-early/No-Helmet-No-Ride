@@ -11,7 +11,6 @@ import UIKit
 class UsageInvoiceViewController: UIViewController {
     
     let usageInvoiceView = UsageInvoiceView()
-    var usageInfo: UserUsageInfo?
     
     
     override func loadView() {
@@ -21,12 +20,10 @@ class UsageInvoiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         usageInvoiceView.delegate = self
-        
-        // 실제 CoreData 값으로 뷰 구성
-           if let info = usageInfo {
-               usageInvoiceView.configure(with: info)
-           }
-
+    }
+    
+    func updateData(usageInfo: UserUsageInfo) {
+        usageInvoiceView.updateUI(usageInfo: usageInfo)
     }
 }
 

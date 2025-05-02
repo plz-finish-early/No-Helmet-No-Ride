@@ -9,8 +9,12 @@ import UIKit
 
 class CustomBottomSheetView: UIView {
     
-    private var timer: Timer?
     private var startTime: Date?
+    private var timer: Timer?
+    private var distance: Double = 0
+    private var batteryAmount: Double = 0
+    var usageDistance: Int32 = 0
+    var usageAmount: Int32 = 0
     
     weak var delegate: CustomBottomSheetViewDelegate?
     
@@ -25,7 +29,7 @@ class CustomBottomSheetView: UIView {
     let kickboardLabel = UILabel()
     let kickboardBatteryLabel = UILabel()
     let kickboardTimeLabel = UILabel()
-    
+        
     override init(frame: CGRect) {
         
         super.init(frame: frame)
@@ -44,32 +48,52 @@ class CustomBottomSheetView: UIView {
         delegate?.didRequestHide()
     }
     
-    private func startTimer() {
+    func startTimer() {
         startTime = Date()
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateTimeLabel),
-            userInfo: nil,
-            repeats: true
-        )
-        timer?.tolerance = 0.1
-    }
-
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-        startTime = nil
+        distance = 0
+        timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                     target: self,
+                                     selector: #selector(updateInfo),
+                                     userInfo: nil,
+                                     repeats: true)
     }
     
-    @objc private func updateTimeLabel() {
+    // 타이머 중지
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc private func updateInfo() {
         guard let startTime = startTime else { return }
         let elapsedTime = Date().timeIntervalSince(startTime)
         let minutes = Int(elapsedTime) / 60
         let seconds = Int(elapsedTime) % 60
-        kickboardTimeLabel.text = String(format: "사용 시간: %02d분 %02d초", minutes, seconds)
-    }
 
+        let kickboardSpeed: Double = Double(Int.random(in: 1...5)) // m/s (10km/h)
+        // 거리 계산 (10km/h = 3/s)
+        distance = elapsedTime * kickboardSpeed
+        usageDistance = usageDistance + Int32(distance)
+        
+        // 거리에 따른 가산 요금 분기처리
+        usageAmount = usageAmount + 100
+        
+        
+        //kickboardDistanceLabel.text = String(format: "이동 거리: %.1f m", distance)
+        
+        //배터리 매 초에 0.1 감소
+        batteryAmount = batteryAmount - 0.07
+        kickboardBatteryLabel.text = String(format: "배터리 잔량 %.1f%%", batteryAmount)
+        // 시간 표시
+        kickboardTimeLabel.text = String(format: "사용 시간: %02d분 %02d초", minutes, seconds)
+        
+        // 오늘 날짜 표시
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        let todayString = formatter.string(from: Date())
+    }
+    
     
     private func updateUIForRentalState() {
         kickboardTimeLabel.isHidden = !isRenting
@@ -107,8 +131,6 @@ class CustomBottomSheetView: UIView {
             isRenting.toggle()
 
             let usageTime = Date().timeIntervalSince(startTime ?? Date())
-            let usageDistance: Int32 = 2600
-            let usageAmount: Int32 = 1500
 
             let userID = LoginViewController.shared.loginUserID
             let kickboardID = kickboardIDLabel.text ?? "알 수 없음"
@@ -131,6 +153,8 @@ class CustomBottomSheetView: UIView {
                     addedTime: usageTime,
                     addedDistance: usageDistance
                 )
+                
+                CoreDataManager.shared.updateKickboardBattery(kickboard: kickboard, newBattery: batteryAmount)
             }
 
             // 유저에서 킥보드 연결 해제
@@ -140,10 +164,13 @@ class CustomBottomSheetView: UIView {
 
             let usageList = CoreDataManager.shared.fetchUsageInfos(for: userID)
             guard let latestUsage = usageList.last else { return }
-
+            print(latestUsage)
             let invoiceVC = UsageInvoiceViewController()
-            invoiceVC.usageInfo = latestUsage
+            invoiceVC.updateData(usageInfo: latestUsage)
             delegate?.presentInvoiceViewController(invoiceVC)
+            
+            usageDistance = 0 // 거리 초기화
+            usageAmount = 1500 // 기본요금으로 초기화
         }
     }
     
@@ -216,9 +243,10 @@ class CustomBottomSheetView: UIView {
         }
     }
     
-    func configureKickboard(id: String, battery: Int) {
+    func configureKickboard(id: String, battery: Double) {
+        batteryAmount = battery
         kickboardIDLabel.text = id
-        kickboardBatteryLabel.text = "배터리 잔량: \(battery)%"
+        kickboardBatteryLabel.text = String(format: "배터리 잔량 %.1f%%", batteryAmount)
     }
 }
 

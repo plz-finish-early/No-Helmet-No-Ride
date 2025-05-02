@@ -139,12 +139,12 @@ extension MainMapViewController: CustomBottomSheetViewDelegate {
 
 // MARK: - Map Interaction Delegate
 extension MainMapViewController: MapViewDelegate {
-    func didTapMarker(title: String, kickboardID: String, battery: Int16) {
+    func didTapMarker(title: String, kickboardID: String, battery: Double) {
         showBottomSheet()
         
         bottomSheetView.configureKickboard(
                 id: kickboardID,
-                battery: Int(battery)
+                battery: Double(battery)
             )
     }
     

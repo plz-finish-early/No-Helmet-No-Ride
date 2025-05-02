@@ -42,7 +42,7 @@ final class CoreDataManager {
     }
 
     /// 킥보드 등록
-    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Int16, lat: Double, lng: Double, userID: String) {
+    func createKickboardData(kickboardID: String, isRidingKickboard: Bool, registrationDate: Date, totalUsageTime: Double, totalUsageDistance: Int32, kickboardBatteryAmount: Double, lat: Double, lng: Double, userID: String) {
         if isKickboardRegistered(kickboardID: kickboardID) {
             print("이미 등록된 킥보드입니다.")
             return
@@ -162,7 +162,7 @@ final class CoreDataManager {
     }
 
     /// 배터리 잔량 수정
-    func updateKickboardBattery(kickboard: KickboardData, newBattery: Int16) {
+    func updateKickboardBattery(kickboard: KickboardData, newBattery: Double) {
         kickboard.kickboardBatteryAmount = newBattery
         saveContext()
     }
