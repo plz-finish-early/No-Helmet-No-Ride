@@ -26,19 +26,23 @@ class UsageStatusViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var statusView: UIView = {
-        switch self.status {
-        case .using:
-            let statusView = UsageStatusUsingView()
-            return statusView
-        case .empty:
-            let statusView = UsageStatusEmptyView()
-            return statusView
-        }
-    }()
-    
     override func loadView() {
-        self.view = statusView
+        let currentUserID = LoginViewController.shared.loginUserID
+        if let kickboard = CoreDataManager.shared.fetchInUseKickboards(for: currentUserID) {
+            let usingView = UsageStatusUsingView()
+            usingView.configure(with: kickboard)
+            usingView.confirmButton.addTarget(self, action: #selector(didTappedConfirmButton), for: .touchUpInside)
+            self.view = usingView
+        } else {
+            let emptyView = UsageStatusEmptyView()
+            emptyView.confirmButton.addTarget(self, action: #selector(didTappedConfirmButton), for: .touchUpInside)
+            self.view = emptyView
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,28 +51,11 @@ class UsageStatusViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupNavigation()
-        addButtonAction()
-        
-        if status == .using,
-              let usingView = statusView as? UsageStatusUsingView,
-              let kickboard = kickboard {
-               usingView.configure(with: kickboard)
-           }
-    }
     
     func setupNavigation() {
         self.navigationItem.title = "이용 현황"
     }
     
-    func addButtonAction() {
-        if let usingView = statusView as? UsageStatusUsingView {
-            usingView.confirmButton.addTarget(self, action: #selector(didTappedConfirmButton), for: .touchUpInside)
-        }
-    }
     
     @objc
     func didTappedConfirmButton() {

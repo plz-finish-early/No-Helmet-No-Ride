@@ -10,7 +10,6 @@ import SnapKit
 class MainMapViewController: BaseMapViewController {
     
     // MARK: - UI Components
-    var customSegmentedControl = UISegmentedControl()
     let bottomSheetView = CustomBottomSheetView()
     let ridingKickboardView = RidingKickboardView()
     let usingKickboardButton = UsingKickboardButton(title: "킥보드 이용하기")
@@ -32,6 +31,9 @@ class MainMapViewController: BaseMapViewController {
     private func setupUI() {
         view.backgroundColor = .clear
         usingKickboardButton.addTarget(self, action: #selector(didTapUsingKickboardButton), for: .touchUpInside)
+        
+        ridingKickboardView.layer.borderColor = UIColor.black.cgColor
+        ridingKickboardView.layer.borderWidth = 1
     }
     
     private func configureBottomSheet() {
@@ -48,7 +50,7 @@ class MainMapViewController: BaseMapViewController {
     @objc func didTapUsingKickboardButton() {
         showKickboardUseAlert()
     }
-
+    
     func showKickboardUseAlert() {
         let alert = UIAlertController(
             title: "킥보드를 선택해 주세요.",
@@ -80,19 +82,10 @@ class MainMapViewController: BaseMapViewController {
     
     // MARK: - AutoLayout Setup
     private func setupConstraints() {
-        super.setupMapView()  // 부모 클래스의 지도 뷰 설정 호출
         
         // 모든 UI 컴포넌트 추가
-        [customSegmentedControl, bottomSheetView, ridingKickboardView, usingKickboardButton].forEach {
+        [bottomSheetView, ridingKickboardView, usingKickboardButton].forEach {
             view.addSubview($0)
-        }
-        
-        // 레이아웃 제약 조건
-        customSegmentedControl.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-            $0.leading.equalToSuperview().offset(12)
-            $0.trailing.equalToSuperview().inset(12)
-            $0.height.equalTo(26)
         }
         
         bottomSheetView.snp.makeConstraints {
@@ -107,7 +100,7 @@ class MainMapViewController: BaseMapViewController {
         }
         
         ridingKickboardView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().inset(121)
             $0.height.equalTo(100)
             $0.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
             $0.bottom.equalTo(bottomSheetView.snp.top).offset(-60).priority(.high)
@@ -118,7 +111,18 @@ class MainMapViewController: BaseMapViewController {
 
 // MARK: - Bottom Sheet Delegate
 extension MainMapViewController: CustomBottomSheetViewDelegate {
-
+    func didRequestShowUsageInvoiceView() {
+        let usageInvoiceVC = UsageInvoiceViewController()
+        usageInvoiceVC.modalPresentationStyle = .overFullScreen
+        present(usageInvoiceVC, animated: true)
+    }
+    
+    func didRequestShowSafetyInstructions() {
+        let safetyVC = SafetyInstructionsViewController()
+        safetyVC.modalPresentationStyle = .overFullScreen // 필요에 따라 스타일 지정
+        present(safetyVC, animated: true)
+    }
+    
     func didRequestHide() {
         hideBottomSheet()
     }
@@ -126,12 +130,22 @@ extension MainMapViewController: CustomBottomSheetViewDelegate {
     func didChangeRentalState(isRenting: Bool) {
         ridingKickboardView.ridingKickboardLabel.backgroundColor = isRenting ? .sub2 : .systemGray5
     }
+    
+    func presentInvoiceViewController(_ vc: UsageInvoiceViewController) {
+          vc.modalPresentationStyle = .overFullScreen
+          present(vc, animated: true)
+      }
 }
 
 // MARK: - Map Interaction Delegate
 extension MainMapViewController: MapViewDelegate {
-    func didTapMarker(title: String, address: String) {
+    func didTapMarker(title: String, kickboardID: String, battery: Int16) {
         showBottomSheet()
+        
+        bottomSheetView.configureKickboard(
+                id: kickboardID,
+                battery: Int(battery)
+            )
     }
     
     func didTapMap() {

@@ -25,6 +25,8 @@ class UsageInvoiceView: UIView {
     // 찬호박님 버튼, 로그인 버튼
     let mainButton = MainButton(title: "확인") // 로그인 버튼
     
+    weak var delegate: UsageInvoiceViewDelegate?
+
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -193,6 +195,7 @@ class UsageInvoiceView: UIView {
 
         // 확인 버튼 추가
         self.addSubview(mainButton)
+        mainButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         
         // 제약 설정
         self.mainButton.snp.makeConstraints {
@@ -213,4 +216,31 @@ class UsageInvoiceView: UIView {
             $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(36)
         }
     }
+    
+    @objc private func confirmButtonTapped() {
+        print("confirmButtonTapped")
+        delegate?.didTapConfirm()
+    }
+    
+    // 저장된 데이터로 나타내주는 함수
+    func configure(with info: UserUsageInfo) {
+        kickboardIdLabel.text = info.kickboardID ?? "알 수 없음"
+
+        if let date = info.usageDate {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy년 MM월 dd일"
+            useDateDataLabel.text = formatter.string(from: date)
+        } else {
+            useDateDataLabel.text = "날짜 없음"
+        }
+
+        drivingTimeData.text = "\(Int(info.usageTime))분"
+        let km = Double(info.usageDistance) / 1000.0
+        drivingDistanceDataLabel.text = String(format: "%.1fKM", km)
+        chargeDataLabel.text = "KRW \(info.usageAmount) 원"
+    }
+}
+
+protocol UsageInvoiceViewDelegate: AnyObject {
+    func didTapConfirm()
 }

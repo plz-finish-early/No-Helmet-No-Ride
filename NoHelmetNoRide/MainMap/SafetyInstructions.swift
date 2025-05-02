@@ -8,6 +8,8 @@ import UIKit
 
 class SafetyInstructions: UIView {
     
+    weak var delegate: SafetyInstructionsViewDelegate?
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .warning
@@ -105,5 +107,10 @@ class SafetyInstructions: UIView {
     
     @objc private func confirmButtonTapped() {
         print("confirmButtonTapped")
+        delegate?.didTapConfirm()
     }
+}
+
+protocol SafetyInstructionsViewDelegate: AnyObject {
+    func didTapConfirm()
 }

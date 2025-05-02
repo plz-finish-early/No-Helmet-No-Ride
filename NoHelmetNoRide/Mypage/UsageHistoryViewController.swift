@@ -25,6 +25,20 @@ class UsageHistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+
+        let currentUserID = LoginViewController.shared.loginUserID
+
+        // 더미 데이터 삭제
+        let allUsageList = CoreDataManager.shared.fetchUsageInfos(for: currentUserID)
+        for info in allUsageList {
+            if info.kickboardID == "K001" || info.kickboardID == "test1234" || info.kickboardID == "킥보드 ID" {
+                CoreDataManager.shared.deleteUsageInfo(info: info)
+            }
+        }
+
+        // 삭제 후 리스트 새로 불러오기
+        usageHistoryList = CoreDataManager.shared.fetchUsageInfos(for: currentUserID)
+        usageHistoryView.tableView.reloadData()
     }
     
     private func setupNavigation() {

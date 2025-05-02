@@ -29,6 +29,7 @@ class KickboardRegistrationView: UIView {
         let textField = UITextField()
         textField.placeholder = "킥보드 아이디"
         textField.clearButtonMode = .always
+        textField.textColor = .font
         return textField
     }()
     
