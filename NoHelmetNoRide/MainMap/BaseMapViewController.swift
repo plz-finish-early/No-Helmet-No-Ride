@@ -127,12 +127,14 @@ class BaseMapViewController: UIViewController {
     // CoreData 킥보드 정보로 부터 마커 업데이트 메서드
     func updateMarker() {
         if let usingKickboard = CoreDataManager.shared.fetchInUseKickboards(for: LoginViewController.shared.loginUserID) {
-            for marker in markers {
-                marker.mapView = nil
-            }
-            markers.removeAll()
             
-            makeMarker(kickboard: usingKickboard)
+            for marker in markers {
+                if let id = marker.userInfo["kickboardID"] as? String {
+                    if id == usingKickboard.kickboardID {
+                        marker.mapView = nil
+                    }
+                }
+            }
         } else {
             for kickboard in kickboardData {
                 makeMarker(kickboard: kickboard)
