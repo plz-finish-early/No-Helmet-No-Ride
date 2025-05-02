@@ -31,7 +31,7 @@
 - Language : Swift
 - IDE : Xcode
 - 버전 : iOS 16
-- 라이브러리 : SnapKit, Alamofire
+- 라이브러리 : SnapKit, Alamofire, NMapsMap, CoreLocation
 - UI 구현 : UIKit
 - UI 디자인 : Figma
 - 디자인 패턴 : Delegate 패턴
