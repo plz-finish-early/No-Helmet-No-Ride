@@ -85,12 +85,12 @@ class KickboardRegistrationViewController: UIViewController {
                                       message: "킥보드 등록이 완료되었습니다.\n등록 초기 화면으로 이동합니다.",
                                       preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+            self.registrationView.idTextField.text = ""
+            self.registedID = CoreDataManager.shared.fetchKickboardData()
+            self.delegate?.dismiss()
+        }))
         self.present(alert, animated: true)
-        registrationView.idTextField.text = ""
-        
-        registedID = CoreDataManager.shared.fetchKickboardData()
-        delegate?.dismiss()
     }
 }
 
